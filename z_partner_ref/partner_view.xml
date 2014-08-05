@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="view_z_partner_ref_config_form" model="ir.ui.view">
+			<field name="name">z_partner_ref_config.form</field>
+			<field name="model">z.partner.ref.config</field>
+			<field name="inherit_id" ref="base.res_config_view_base" />
+			<field name="arch" type="xml">
+				<form position="attributes">
+					<attribute name="string">Migrate Or Create New Partner Reference</attribute>
+				</form>
+
+				<group string="res_config_contents" position="replace">
+					<field name="generate_ref" />
+                </group>
+			</field>
+		</record>
+
+		<record id="action_z_partner_ref_config" model="ir.actions.act_window">
+			<field name="name">Migrate or Create New Partner Reference</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">z.partner.ref.config</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="view_z_partner_ref_config_form" />
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+		<record id="z_partner_ref_config_todo" model="ir.actions.todo">
+            <field name="action_id" ref="action_z_partner_ref_config"/>
+            <field name="sequence">200</field>
+            <field name="type">automatic</field>
+        </record>
+
+
+
+	</data>
+</openerp>

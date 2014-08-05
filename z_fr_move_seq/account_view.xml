@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="view_z_fr_move_seq_config_form" model="ir.ui.view">
+			<field name="name">z_fr_move_seq_config_form</field>
+			<field name="model">z.fr.move.seq.config</field>
+			<field name="inherit_id" ref="base.res_config_view_base" />
+			<field name="arch" type="xml">
+				<form position="attributes">
+					<attribute name="string">Unique id for all moves</attribute>
+				</form>
+
+				<group string="res_config_contents" position="replace">
+					<field name="generate_ref" />
+                </group>
+			</field>
+		</record>
+
+		<record id="action_z_fr_move_seq_config" model="ir.actions.act_window">
+			<field name="name">Rename all move line with unique id</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">z.fr.move.seq.config</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="view_z_fr_move_seq_config_form" />
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+		<record id="z_fr_move_seq_config_todo" model="ir.actions.todo">
+            <field name="action_id" ref="action_z_fr_move_seq_config"/>
+            <field name="sequence">200</field>
+            <field name="type">automatic</field>
+        </record>
+
+        <!-- Viex customiz -->
+
+        <record id="z_view_account_move_form_inherit" model="ir.ui.view">
+           <field name="name">z.account.move.form.inherit</field>
+           <field name="model">account.move</field>
+           <field name="inherit_id" ref="account.view_move_form"/>
+           <field name="arch" type="xml">
+                <field name="period_id" position="after">
+                    <field name="unique_piece_id"/>
+                </field>
+           </field>
+        </record>
+
+
+        <record id="z_view_account_move_tree_inherit" model="ir.ui.view">
+            <field name="name">z.account.move.tree.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_tree"/>
+            <field name="arch" type="xml">
+                <field name="ref" position="before">
+                    <field name="unique_piece_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="z_view_move_search_inherit">
+            <field name="name">z.view.move.search.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_move_filter"/>
+            <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="unique_piece_id"/>
+                </xpath>
+            </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="z_view_move_line_form_inherit">
+            <field name="name">z.view.move.line.form.inherit</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_form"/>
+            <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='ref']" position="after">
+                    <field name="unique_piece_id"/>
+                </xpath>
+            </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="z_view_move_line_search_inherit">
+            <field name="name">z.view.move.line.search.inherit</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+            <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='move_id']" position="after">
+                    <field name="unique_piece_id"/>
+                </xpath>
+            </data>
+            </field>
+        </record>
+
+
+
+	</data>
+</openerp>

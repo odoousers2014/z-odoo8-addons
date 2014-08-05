@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="1">
+		<record id="seq_type_z_fr_move_seq_config" model="ir.sequence.type">
+			<field name="name">Move Unique Sequence</field>
+			<field name="code">z.fr.move.seq</field>
+		</record>
+		<record id="seq_z_fr_move_seq_config" model="ir.sequence">
+			<field name="name">Unique Move Sequence</field>
+			<field name="code">z.fr.move.seq</field>
+			<field name="prefix">AJ</field>
+			<field name="padding">4</field>
+		</record>
+	</data>
+</openerp>

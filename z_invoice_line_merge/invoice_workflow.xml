@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+<!-- Activity -->
+		<record id="act_verifie" model="workflow.activity">
+            <field name="wkf_id" ref="account.wkf"/>
+            <field name="name">verifie</field>
+            <field name="action">action_facture_verifie()
+</field>
+            <field name="kind">function</field>
+        </record>
+
+        <record id="account.act_open" model="workflow.activity">
+            <field name="wkf_id" ref="account.wkf"/>
+            <field name="name">open</field>
+            <field name="action">action_date_assign()
+action_move_create()
+action_number()
+invoice_validate()</field>
+            <field name="kind">function</field>
+        </record>
+
+
+<!-- Transitions -->
+
+        <record id="t_verifie" model="workflow.transition">
+            <field name="act_from" ref="account.act_draft"/>
+            <field name="act_to" ref="act_verifie"/>
+            <field name="signal">verifie</field>
+        </record>
+        
+        <record id="t4" model="workflow.transition">
+            <field name="act_from" ref="act_verifie"/>
+            <field name="act_to" ref="account.act_open"/>
+            <field name="signal">invoice_open</field>
+        </record>
+        
+        <delete id="account.t4" model="workflow.transition"></delete>
+    </data>
+</openerp>

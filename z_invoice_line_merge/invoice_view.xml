@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data> 
+      <record model="ir.ui.view" id="z_account_invoice_fr_form">
+        <field name="name">z.account.invoice.fr.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+<!-- Header -->
+        	
+        	<xpath expr="//form/header/button[@name='invoice_open']" position="before">
+        		<button name="verifie" states="draft" string="Verifi&#233;e" class="oe_highlight" type="workflow" groups="base.group_user"/>
+        	</xpath>
+        	
+        	<xpath expr="//form/header/button[@name='invoice_open']" position="replace"/>
+        	
+        	<xpath expr="//form/header/button[@name='invoice_cancel']" position="before">
+        	  <button name="invoice_open" states="verifie" string="Validate" class="oe_highlight" groups="base.group_user"/>
+        	  <button name="action_draft" states="verifie" string="Remettre au Brouillon" type="object"/>
+        	</xpath>
+        	
+        </field>
+      </record>
+
+      <record model="ir.ui.view" id="z_account_invoice_supplier_fr_form">
+        <field name="name">z.account.invoice.supplier.fr.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+    
+<!-- Header -->
+        	
+        	<xpath expr="//form/header/button[@name='invoice_open']" position="before">
+        		<button name="verifie" states="draft" string="Verifi&#233;e" class="oe_highlight" type="workflow" groups="base.group_user"/>
+        	</xpath>
+        	
+        	<xpath expr="//form/header/button[@name='invoice_open']" position="replace"/>
+        	
+        	<xpath expr="//form/header/button[@name='invoice_cancel']" position="before">
+        	  <button name="invoice_open" states="verifie" string="Validate" class="oe_highlight" groups="base.group_user"/>
+        	  <button name="action_draft" states="verifie" string="Remettre au Brouillon" type="object"/>
+        	</xpath>
+        	
+        </field>
+      </record>
+
+   </data>
+</openerp>      	

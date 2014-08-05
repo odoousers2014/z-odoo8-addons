@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="1">
+		<record id="seq_type_z_customer" model="ir.sequence.type">
+			<field name="name">Partner Customer ref</field>
+			<field name="code">z.partner.ref.customer</field>
+		</record>
+		<record id="seq_z_customer" model="ir.sequence">
+			<field name="name">Z partner reference customer</field>
+			<field name="code">z.partner.ref.customer</field>
+			<field name="prefix">C%(y)s</field>
+			<field name="padding">4</field>
+		</record>
+
+		<record id="seq_type_z_supplier" model="ir.sequence.type">
+			<field name="name">Partner Supplier Ref</field>
+			<field name="code">z.partner.ref.supplier</field>
+		</record>
+		<record id="seq_z_supplier" model="ir.sequence">
+			<field name="name">Z partner reference supplier</field>
+			<field name="code">z.partner.ref.supplier</field>
+			<field name="prefix">S%(y)s</field>
+			<field name="padding">4</field>
+		</record>
+
+		<record id="seq_type_z_third" model="ir.sequence.type">
+			<field name="name">Partner third Ref</field>
+			<field name="code">z.partner.ref.third</field>
+		</record>
+		<record id="seq_z_third" model="ir.sequence">
+			<field name="name">Z partner reference third</field>
+			<field name="code">z.partner.ref.third</field>
+			<field name="prefix">A%(y)s</field>
+			<field name="padding">4</field>
+		</record>
+	</data>
+</openerp>
