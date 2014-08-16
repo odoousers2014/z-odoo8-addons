@@ -19,13 +19,27 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import itertools
+import logging
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+from operator import itemgetter
+import time
 
-from openerp.osv import fields, osv
+import openerp
+from openerp import SUPERUSER_ID, api
+from openerp import tools
+from openerp.osv import fields, osv, expression
+from openerp.tools.translate import _
+from openerp.tools.float_utils import float_round as round
+
+import openerp.addons.decimal_precision as dp
+
+_logger = logging.getLogger(__name__)
 
 class account_invoice(osv.osv):
 
     _inherit = 'account.invoice'
-
 
 
     def inv_line_characteristic_hashcode(self, invoice_line):
@@ -38,21 +52,29 @@ class account_invoice(osv.osv):
             invoice_line['account_id'],
             invoice_line.get('tax_code_id',"False"),
             invoice_line.get('analytic_account_id',"False"),
-            invoice_line.get('date_maturity',"False"))
+            invoice_line.get('date_maturity',"False")
+            )
         return value
 
         return super(account_invoice, self).inv_line_characteristic_hashcode(invoice_line)
-
 
 
     def action_number(self, cr, uid, ids, *args):
         result = super(account_invoice, self).action_number(cr, uid, ids, *args)
 
         for inv in self.browse(cr, uid, ids):
-            invtype = inv.type
-            number = inv.number
-            move_id = inv.move_id and inv.move_id.id or False
-            reference = inv.reference or ''
+            if inv.type in ('in_invoice', 'in_refund'):
+                if not inv.reference:
+                    ref = self._convert_ref(inv.number)
+                else:
+                    ref = inv.reference
+            else:
+                ref = self._convert_ref(inv.number)
+
+            # invtype = inv.type
+            # number = inv.number
+            # move_id = inv.move_id and inv.move_id.id or False
+            # reference = inv.reference or ''
 
             partner = '%s' %(inv.move_id.partner_id.name)
             name = '%s' %(inv.number)
@@ -69,12 +91,5 @@ class account_invoice(osv.osv):
                     (custom, inv.move_id.id))
         return result
 
+account_invoice()
 
-class account_invoice_line(osv.osv):
-
-    _inherit = 'account.invoice.line'
-
-    def move_line_get_item(self, cr, uid, line, context=None):
-        if line.price_subtotal == 0 :
-            return False
-        return super(account_invoice_line, self).move_line_get_item(cr, uid, line, context=context)
