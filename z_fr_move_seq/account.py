@@ -21,6 +21,7 @@
 ##############################################################################
 
 from openerp.osv import osv, fields
+from openerp.tools.translate import _
 
 GENERATE_REFS = [('none', 'None'),
                  ('empty', 'For moves with empty references'),
