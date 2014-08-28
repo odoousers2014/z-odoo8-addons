@@ -27,6 +27,8 @@ class account_move_line(osv.osv):
     _inherit = "account.move.line"
 
     def write(self, cr, uid, ids, vals, context=None, check=True, update_check=True):
+        result = super(account_move_line, self).write(
+            cr, uid, ids, vals, context, check, update_check=False)
         account_obj = self.pool.get('account.account')
         move_obj = self.pool.get('account.move')
         cur_obj = self.pool.get('res.currency')
@@ -36,15 +38,15 @@ class account_move_line(osv.osv):
 
         for line in self.browse(cr, uid, ids, context=context):
             account = line.account_id.name
+            org_name = line.name
 
-        org_name = vals['name']
+        # org_name = vals['name']
         shortkey = '/**'
         if shortkey in org_name:
             up = account
             vals.update({'name': up})
 
-        result = super(account_move_line, self).write(
-            cr, uid, ids, vals, context, check, update_check=False)
+
         return result
 
     def create(self, cr, uid, vals, context=None, check=True):
