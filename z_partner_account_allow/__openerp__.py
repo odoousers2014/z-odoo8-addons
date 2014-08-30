@@ -31,7 +31,7 @@ Allow to choose same receivable and payable account for partner
     """,
     'author': 'Zuher Elmas',
     'depends': ['account'],
-    'data': [],
+    'data': ['account_invoice_view.xml',],
     'demo_xml': [],
     'test': [],
     'installable': True,
