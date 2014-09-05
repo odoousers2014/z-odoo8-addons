@@ -41,10 +41,10 @@ class account_move_line(osv.osv):
             org_name = line.name
 
         # org_name = vals['name']
-        shortkey = '/**'
-        if shortkey in org_name:
-            up = account
-            vals.update({'name': up})
+            shortkey = '/**'
+            if shortkey in org_name:
+                up = account
+                vals.update({'name': up})
 
 
         return result
