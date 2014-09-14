@@ -65,11 +65,12 @@ class account_invoice(osv.osv):
         for inv in self.browse(cr, uid, ids):
             if inv.type in ('in_invoice', 'in_refund'):
                 if not inv.reference:
-                    ref = self._convert_ref(inv.number)
+                    # ref = self._convert_ref(inv.number)
+                    ref = inv.number
                 else:
                     ref = inv.reference
             else:
-                ref = self._convert_ref(inv.number)
+                ref = inv.number
 
             # invtype = inv.type
             # number = inv.number
