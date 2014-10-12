@@ -1,0 +1,14 @@
+<openerp>
+    <data>
+        <record id="view_order_form_sale_credit_limit" model="ir.ui.view">
+            <field name="name">view.order.form.credit.limit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header/button" position="inside">
+                     <button name="unblock_order" string="Unblock" type="object" states="blocked" class="oe_highlight" groups="base.group_sale_manager,account.group_account_user "/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="act_credit_limit_wait" model="workflow.activity">
+            <field name="wkf_id" ref="sale.wkf_sale"/>
+            <field name="name">act_approval_request</field>
+            <field name="kind">function</field>
+            <field name="action">write({'state':'blocked'})</field>
+        </record>
+
+        <record id="trans_draft_router" model="workflow.transition">
+            <field name="act_from" ref="sale.act_draft"/>
+            <field name="act_to" ref="act_credit_limit_wait"/>
+            <field name="signal">blocked</field>
+        </record>
+        <record id="trans_sent_router" model="workflow.transition">
+            <field name="act_from" ref="sale.act_sent"/>
+            <field name="act_to" ref="act_credit_limit_wait"/>
+            <field name="signal">blocked</field>
+        </record>
+
+        <record id="trans_confirmed_unblock" model="workflow.transition">
+            <field name="act_from" ref="act_credit_limit_wait"/>
+            <field name="act_to" ref="sale.act_router"/>
+            <field name="signal">unblock_order</field>
+            <field name="group_id" ref="base.group_sale_manager"/>
+        </record>
+
+    </data>
+</openerp>

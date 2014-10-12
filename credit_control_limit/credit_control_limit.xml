@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_partner_property_form_credit_control_limit" model="ir.ui.view">
+            <field name="name">res.partner.property.form.credit.control.limit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">16</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <field name="credit" position="before">
+                    <field name="credit_allow"/>
+                    <field name="order_policy"/>
+                    <field name="amount_not_invoiced"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
