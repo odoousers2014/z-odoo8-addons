@@ -23,6 +23,7 @@
 from openerp import models, fields, api, _
 from openerp.osv import osv
 
+
 class res_partner(models.Model):
     _inherit = "res.partner"
 
@@ -38,5 +39,3 @@ class res_partner(models.Model):
         self.departement_id = cza.departement_id.id if cza.departement_id else False
         self.country_id = cza.country_id.id if cza.country_id else False
         self.state_id = cza.state_id.id if cza.state_id else False
-
-

@@ -23,10 +23,10 @@
 from openerp import models, fields, api, _
 from openerp.osv import osv
 
+
 class cza_departement(models.Model):
 
     _name = 'cza.departement'
-
 
     name = fields.Char(string='Name Departement', required=True)
     code = fields.Char(string='Code Departement', required=True, size=64)
@@ -34,19 +34,15 @@ class cza_departement(models.Model):
     country_id = fields.Many2one('res.country', string='Country', )
 
 
-
 class city_zip_autocomplete(models.Model):
 
     _name = 'city.zip.autocomplete'
 
-
     name = fields.Char('ZIP', required=True)
     city = fields.Char('City', required=True)
-    departement_id = fields.Many2one('cza.departement', 'Departement' )
+    departement_id = fields.Many2one('cza.departement', 'Departement')
     state_id = fields.Many2one('res.country.state', 'State')
     country_id = fields.Many2one('res.country', 'Country')
-
-
 
     @api.multi
     @api.depends('name', 'city', 'departement_id', 'country_id')
@@ -67,13 +63,11 @@ class city_zip_autocomplete(models.Model):
             result.append((cza.id, ' - '.join(name)))
         return result
 
-
     @api.onchange('departement_id')
     def onchange_departement_id(self):
         dep = self.departement_id
         if dep:
             self.state_id = dep.state_id.id
-
 
     @api.onchange('state_id', 'country_id')
     def onchange_state_id(self):
@@ -81,32 +75,12 @@ class city_zip_autocomplete(models.Model):
         if st:
             self.country_id = st.country_id.id
 
-
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
-
         args = args or []
-        # if context is None:
-        #     context = {}
-
         if name:
             args = [('name', operator, name)] + args
-            # args = self.search([('name', 'ilike', name)] + args, limit=limit)
         if not args:
             args = [('city', operator, name)] + args
-            # args = self.search([('city', operator, name)] + args, limit=limit)
         addr = self.search(args, limit=limit)
         return addr.name_get()
-
-    # def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=100):
-    #     if args is None:
-    #         args = []
-    #     if context is None:
-    #         context = {}
-    #     ids = []
-    #     if name:
-    #         ids = self.search(cr, uid, [('name', 'ilike', name)] + args, limit=limit)
-    #     if not ids:
-    #         ids = self.search(cr, uid, [('city', operator, name)] + args, limit=limit)
-    #     return self.name_get(cr, uid, ids, context=context)
-
