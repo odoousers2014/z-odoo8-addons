@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <record id="view_partner_form_city_zip_autocomplete" model="ir.ui.view">
+      <field name="name">res.partner.city.zip.autocomplete</field>
+      <field name="model">res.partner</field>
+      <field eval="99" name="priority"/>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <field name="street2" position="after">
+          <field name="zip_id" class="oe_edit_only" options="{'create_name_field': 'city'}" placeholder="Zip and City" attrs="{'invisible': [('use_parent_address','=',True)]}"/>
+        </field>
+
+        <xpath expr="//field[@name='child_ids']/form//field[@name='street2']" position="after">
+          <field name="zip_id"  class="oe_edit_only" options="{'create_name_field': 'city'}" placeholder="Zip and City" attrs="{'invisible': [('use_parent_address','=',True)]}"/>
+        </xpath>
+
+        <xpath expr="//div[@class='address_format']" position="replace"/>
+        <field name="zip_id" position="after">
+          <field name="zip" placeholder="ZIP" style="width: 20%%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+          <field name="city" placeholder="City" style="width: 80%%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+          <field name="departement_id" class="oe_no_button" placeholder="Departement" style="width: 63%%" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+          <field name="state_id" class="oe_no_button" placeholder="State" style="width: 37%" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+        </field>
+
+        <xpath expr="//field[@name='child_ids']//div[@class='address_format']" position="replace"/>
+        <xpath expr="//field[@name='child_ids']/form//field[@name='zip_id']" position="after">
+          <field name="zip" placeholder="ZIP" style="width: 20%%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+          <field name="city" placeholder="City" style="width: 80%%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+          <field name="departement_id" class="oe_no_button" placeholder="Departement" style="width: 63%%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+          <field name="state_id" class="oe_no_button" placeholder="State" style="width: 37%" options="{&quot;no_open&quot;: True}" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</openerp>

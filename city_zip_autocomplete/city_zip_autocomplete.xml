@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+
+    <record model="ir.ui.view" id="cza_departement_form">
+      <field name="name">cza.departement.form</field>
+      <field name="model">cza.departement</field>
+      <field name="arch" type="xml">
+        <form string="DEPARTEMENT" >
+          <group col="4">
+            <field name="name"/>
+            <field name="code"/>
+            <field name="state_id"/>
+            <field name="country_id"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="city_zip_autocomplete_form">
+      <field name="name">city.zip.autocomplete.form</field>
+      <field name="model">city.zip.autocomplete</field>
+      <field name="arch" type="xml">
+        <form string="City Zip">
+          <group col="4">
+            <field name="name"/>
+            <field name="city"/>
+            <field name="departement_id"/>
+            <field name="state_id"/>
+            <field name="country_id"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="cza_departement_tree">
+      <field name="name">cza.departement.tree</field>
+      <field name="model">cza.departement</field>
+      <field name="arch" type="xml">
+        <tree string="DEPARTEMENT">
+          <field name="name"/>
+          <field name="code"/>
+          <field name="state_id"/>
+          <field name="country_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="city_zip_autocomplete_tree">
+      <field name="name">city.zip.autocomplete.tree</field>
+      <field name="model">city.zip.autocomplete</field>
+      <field name="arch" type="xml">
+        <tree string="ZIP">
+          <field name="name"/>
+          <field name="city"/>
+          <field name="departement_id"/>
+          <field name="country_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="city_zip_autocomplete_filter" model="ir.ui.view">
+      <field name="name">city.zip.autocomplete.select</field>
+        <field name="model">city.zip.autocomplete</field>
+        <field name="arch" type="xml">
+        <search string="Search City or Zip">
+          <field name="name"/>
+          <field name="city"/>
+        </search>
+      </field>
+    </record>
+
+    <record id="action_city_zip_autocomplete_tree" model="ir.actions.act_window">
+      <field name="name">City and Zip Codes</field>
+      <field name="res_model">city.zip.autocomplete</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field ref="city_zip_autocomplete_tree" name="view_id"/>
+      <field name="search_view_id" ref="city_zip_autocomplete_filter"/>
+    </record>
+
+    <record id="action_cza_departement_tree" model="ir.actions.act_window">
+      <field name="name">Departements</field>
+      <field name="res_model">cza.departement</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field ref="cza_departement_tree" name="view_id"/>
+    </record>
+
+    <menuitem
+        name="Cities and Zip Management"
+        id="city_zip_autocomplete_base"
+        parent="base.menu_localisation"
+        action="action_city_zip_autocomplete_tree"
+        />
+      <menuitem
+        name="Departements"
+        id="cza_departement_base"
+        parent="base.menu_localisation"
+        action="action_cza_departement_tree"
+        />
+  </data>
+</openerp>
