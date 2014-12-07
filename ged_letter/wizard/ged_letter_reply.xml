@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_ged_letter_reply_wizard" model="ir.ui.view">
+            <field name="name">Letter Reply</field>
+            <field name="model">ged.letter.reply.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Reply letter" version="7.0">
+                    <separator colspan="4" string="Do you really want to create an reply for this letter?" />
+
+                    <footer>
+                        <button name="create_reply" string="Reply" type="object" icon="terp-gtk-go-back-ltr" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_ged_letter_reply_wizard" model="ir.actions.act_window">
+            <field name="name">Letter Reply</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ged.letter.reply.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_ged_letter_reply_wizard"/>
+            <field name="target">new</field>
+            <field name="multi">True</field>
+        </record>
+
+    <record model="ir.ui.view" id="action_ged_letter_reply_wizard_form_button">
+          <field name="name">reply.wizard.button.header</field>
+          <field name="model">ged.letter</field>
+          <field eval="99" name="priority"/>
+          <field name="inherit_id" ref="ged_letter.ged_letter_receipt_form"/>
+          <field name="arch" type="xml">
+               	<xpath expr="//form/header/button[@name='action_cancel']" position="before">
+					<button name="%(ged_letter.action_ged_letter_reply_wizard)d" string="Answer" class="oe_highlight" type="action" attrs="{'invisible': [('state','in',('draft'))]}"/>
+				</xpath>
+
+		</field>
+	</record>
+
+    <record model="ir.ui.view" id="action_ged_letter_receipt_wizard_form_button">
+          <field name="name">receipt.wizard.button.header</field>
+          <field name="model">ged.letter</field>
+          <field eval="99" name="priority"/>
+          <field name="inherit_id" ref="ged_letter.ged_letter_sent_form"/>
+          <field name="arch" type="xml">
+               	<xpath expr="//form/header/button[@name='action_cancel']" position="before">
+					<button name="%(ged_letter.action_ged_letter_reply_wizard)d" string="Response received" class="oe_highlight" type="action" attrs="{'invisible': [('state','not in',('sent','recipiant_receipt','done'))]}"/>
+				</xpath>
+
+		</field>
+	</record>
+</data>
+</openerp>

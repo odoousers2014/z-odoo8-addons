@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- MODEL RECEIPT-->
+        <record id="wkf_letter_receipt" model="workflow">
+            <field name="name">Letter Receipt</field>
+            <field name="osv">letter.receipt</field>
+            <field name="on_create">True</field>
+        </record>
+        <!-- Activity -->
+        <record id="act_letter_receipt_draft" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_letter_receipt"/>
+            <field name="flow_start">True</field>
+            <field name="name">draft</field>
+        </record>
+        <record id="act_letter_receipt_confirmed" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_letter_receipt"/>
+            <field name="kind">function</field>
+            <field name="name">confirmed</field>
+            <field name="action">wkf_button_confirmed_receipt()</field>
+        </record>
+        <record id="act_letter_receipt_router" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_letter_receipt"/>
+            <field name="name">router</field>
+        </record>
+        <record id="act_letter_receipt_reply" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_letter_receipt"/>
+            <field name="name">reply</field>
+            <field name="kind">function</field>
+            <field name="action">write({'state':'reply'})</field>
+        </record>
+        <record id="act_letter_receipt_done" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_letter_receipt"/>
+            <field name="name">done</field>
+            <field name="kind">function</field>
+            <field name="action">write({'state':'done'})</field>
+        </record>
+        <record id="trans_letter_receipt_draft_confirmed" model="workflow.transition">
+            <field name="act_from" ref="act_letter_receipt_draft"/>
+            <field name="act_to" ref="act_letter_receipt_confirmed"/>
+            <field name="signal">confirmed_receipt</field>
+        </record>
+        <record id="trans_letter_receipt_router" model="workflow.transition">
+            <field name="act_from" ref="act_letter_receipt_confirmed"/>
+            <field name="act_to" ref="act_letter_receipt_router"/>
+            <field name="condition">True</field>
+        </record>
+        <record id="trans_letter_receipt_reply" model="workflow.transition">
+            <field name="act_from" ref="act_letter_receipt_router"/>
+            <field name="act_to" ref="act_letter_receipt_reply"/>
+            <field name="signal">create_reply</field>
+            <field name="condition">True</field>
+        </record>
+        <record id="trans_letter_receipt_done" model="workflow.transition">
+            <field name="act_from" ref="act_letter_receipt_router"/>
+            <field name="act_to" ref="act_letter_receipt_done"/>
+            <field name="condition">True</field>
+            <field name="signal">action_done</field>
+        </record>
+    </data>
+</openerp>

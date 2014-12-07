@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="act_res_partner_letter" model="ir.actions.act_window">
+            <field name="name">Partner letters</field>
+            <field name="res_model">ged.letter</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="ged_letter.ged_letter_tree"/>
+            <field name="context">{'search_default_partner_id': active_id}</field>
+        </record>
+        <record id="res_partner_view_buttons_letter" model="ir.ui.view">
+            <field name="name">res.partner.view.buttons.letter</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field eval="20" name="priority"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='buttons']" position="inside">
+                    <button class="oe_inline oe_stat_button" icon="fa-folder-open" name="%(ged_letter.act_res_partner_letter)d" type="action">
+                        <field name="letter_count" string="Letters" widget="statinfo"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

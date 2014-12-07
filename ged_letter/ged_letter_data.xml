@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Letter-related subtypes for messaging / Chatter -->
+        <record id="lt_assign" model="mail.message.subtype">
+            <field name="name">Letter Assign</field>
+            <field name="res_model">letter</field>
+            <field eval="False" name="default"/>
+            <field name="description">Letter assigned and waiting confirmation</field>
+        </record>
+        <record id="lt_confirmed" model="mail.message.subtype">
+            <field name="name">Letter Confirmed</field>
+            <field name="res_model">letter</field>
+            <field eval="False" name="default"/>
+            <field name="description">Letter Confirmed By Validator</field>
+        </record>
+        <record id="lt_reject" model="mail.message.subtype">
+            <field name="name">Letter Reject</field>
+            <field name="res_model">letter</field>
+            <field eval="False" name="default"/>
+            <field name="description">Letter Reject By Validator</field>
+        </record>
+        <record id="lt_sent" model="mail.message.subtype">
+            <field name="name">Letter Sent</field>
+            <field name="res_model">letter</field>
+            <field eval="False" name="default"/>
+            <field name="description">Letter Sent To Partner</field>
+        </record>
+    </data>
+</openerp>

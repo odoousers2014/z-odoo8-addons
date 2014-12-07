@@ -1,0 +1,1047 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* letter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Letter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-29 18:06+0000\n"
+"PO-Revision-Date: 2014-09-29 20:39+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"X-Generator: Poedit 1.6.7\n"
+
+#. module: letter
+#: help:letter.receipt,state:0
+msgid ""
+"\n"
+"                 * Draft: not confirmed yet\n"
+"\n"
+"                 * Confirmed: This leteer receipt confirmed\n"
+"\n"
+"                 * Reply: When you reply by new letter\n"
+"\n"
+"                 * Cancelled: has been cancelled, can't be confirmed anymore"
+msgstr ""
+"\n"
+"                 * Draft: not confirmed yet\n"
+"\n"
+"                 * Confirmed: This leteer receipt confirmed\n"
+"\n"
+"                 * Reply: When you reply by new letter\n"
+"\n"
+"                 * Cancelled: has been cancelled, can't be confirmed anymore"
+
+#. module: letter
+#: field:res.partner,letter_count:0
+msgid "# of Letters"
+msgstr "# of Letters"
+
+#. module: letter
+#: model:ir.actions.act_window,help:letter.letter_courtesy_action_form
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to create a courtesy model of insert in a letter.\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer pour créer un modèle de formule de politesse.\n"
+"              </p>\n"
+"            "
+
+#. module: letter
+#: model:ir.actions.act_window,help:letter.letter_receipt_action_form
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to create a letter receipt that your partners.\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer pour créer une lettre reçu par un partenaire.\n"
+"              </p>\n"
+"            "
+
+#. module: letter
+#: model:ir.actions.act_window,help:letter.letter_sent_action_form
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to create a letter that you can send to your "
+"partners.\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer pour créer une lettre que vous pouvez expédier à vos "
+"partenaires.\n"
+"              </p>\n"
+"            "
+
+#. module: letter
+#: model:ir.actions.act_window,help:letter.letter_action_form
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to create a letter.\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer pour créer une lettre.\n"
+"              </p>\n"
+"            "
+
+#. module: letter
+#: model:ir.actions.act_window,help:letter.letter_model_action_form
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to create a model letter.\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquez pour créer un modèle de lettre.\n"
+"              </p>\n"
+"            "
+
+#. module: letter
+#: model:ir.actions.act_window,help:letter.letter_cat_action_form
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to create a new category of letter.\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer pour créer une nouvelle catégorie.\n"
+"              </p>\n"
+"            "
+
+#. module: letter
+#: model:ir.actions.act_window,help:letter.letter_transmission_action_form
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to create of transmission model a letter.\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Cliquer pour créer une méthode de remise de lettre.\n"
+"              </p>\n"
+"            "
+
+#. module: letter
+#: field:letter.cat,abrev:0
+msgid "Abbreviation"
+msgstr "Abréviation"
+
+#. module: letter
+#: view:letter.cat:letter.view_letter_cat_form
+msgid "Abreviation"
+msgstr "Abréviation"
+
+#. module: letter
+#: view:letter:letter.view_letter_form
+#: view:letter.sent:letter.view_letter_sent_form
+msgid "Additional Info"
+msgstr "Additional Info"
+
+#. module: letter
+#: view:letter.sent:letter.view_letter_sent_form
+msgid "Approve"
+msgstr "Approuver"
+
+#. module: letter
+#: view:letter.sent:letter.view_letter_sent_form
+msgid "Assign Validator"
+msgstr "Soumettre à validation"
+
+#. module: letter
+#: view:letter:letter.view_letter_form
+#: view:letter.reply.wizard:letter.view_letter_reply_wizard
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: letter
+#: selection:letter,state:0 selection:letter.receipt,state:0
+#: selection:letter.sent,state:0
+msgid "Cancel letter"
+msgstr "Annuler la lettre"
+
+#. module: letter
+#: view:letter.receipt:letter.letter_receipt_view_filter
+#: view:letter.sent:letter.letter_sent_view_filter
+msgid "Category"
+msgstr "Categorie"
+
+#. module: letter
+#: field:letter.cat,letter_cat_id:0
+msgid "Category Letter ID"
+msgstr "Id de la catégorie de la lettre"
+
+#. module: letter
+#: field:letter.cat,parent_id:0
+msgid "Category Parent"
+msgstr "Categorie Parent"
+
+#. module: letter
+#: view:letter.cat:letter.view_letter_cat_form
+msgid "Category name"
+msgstr "Nom de la catégorie"
+
+#. module: letter
+#: field:letter.cat,child_id:0
+msgid "Child Categories"
+msgstr "Catégories enfants"
+
+#. module: letter
+#: field:letter.transmission,ref:0
+msgid "Code"
+msgstr "Code"
+
+#. module: letter
+#: field:letter,company_id:0
+#: view:letter.receipt:letter.letter_receipt_view_filter
+#: field:letter.receipt,company_id:0
+#: view:letter.sent:letter.letter_sent_view_filter
+#: field:letter.sent,company_id:0
+msgid "Company"
+msgstr "Société"
+
+#. module: letter
+#: selection:letter,state:0
+#: view:letter.receipt:letter.letter_receipt_view_filter
+#: view:letter.receipt:letter.view_letter_receipt_form
+#: selection:letter.receipt,state:0
+#: view:letter.sent:letter.view_letter_sent_form selection:letter.sent,state:0
+msgid "Confirmed"
+msgstr "Confirmé"
+
+#. module: letter
+#: field:letter,confirmed_user:0 field:letter.receipt,confirmed_user:0
+#: field:letter.sent,confirmed_user:0
+msgid "Confirmed by Signatory"
+msgstr "Confirmé Par Signataire"
+
+#. module: letter
+#: field:letter.courtesy,content:0
+msgid "Content Courtesy"
+msgstr "Contenu formule de politesse"
+
+#. module: letter
+#: view:letter.sent:letter.view_letter_sent_form
+msgid "Content courtesy"
+msgstr "Contenu formulle politesse"
+
+#. module: letter
+#: field:letter.sent.model,content:0
+msgid "Content model"
+msgstr "Contenu du modèle"
+
+#. module: letter
+#: field:letter,courtesy:0 field:letter.receipt,courtesy:0
+#: field:letter.sent,courtesy:0
+msgid "Content salutation"
+msgstr "Contenu de la formule de politesse"
+
+#. module: letter
+#: field:letter,content:0 field:letter.receipt,content:0
+#: field:letter.sent,content:0
+msgid "Contents of the letter"
+msgstr "Contenu de la lettre"
+
+#. module: letter
+#: field:letter,letter_courtesy_id:0 field:letter.receipt,letter_courtesy_id:0
+#: field:letter.sent,letter_courtesy_id:0
+msgid "Courtesy"
+msgstr "Politesse"
+
+#. module: letter
+#: view:letter.courtesy:letter.letter_courtesy_tree
+msgid "Courtesy Model"
+msgstr "Modèle de formule de politesse"
+
+#. module: letter
+#: model:ir.actions.act_window,name:letter.letter_courtesy_action_form
+msgid "Courtesy model"
+msgstr "Modéle de formulle de politesse"
+
+#. module: letter
+#: field:letter,create_uid:0 field:letter.cat,create_uid:0
+#: field:letter.courtesy,create_uid:0 field:letter.receipt,create_uid:0
+#: field:letter.reply.wizard,create_uid:0 field:letter.sent,create_uid:0
+#: field:letter.sent.model,create_uid:0 field:letter.transmission,create_uid:0
+msgid "Created by"
+msgstr "Créée par"
+
+#. module: letter
+#: field:letter,create_date:0 field:letter.cat,create_date:0
+#: field:letter.courtesy,create_date:0 field:letter.receipt,create_date:0
+#: field:letter.reply.wizard,create_date:0 field:letter.sent,create_date:0
+#: field:letter.sent.model,create_date:0
+#: field:letter.transmission,create_date:0
+msgid "Created on"
+msgstr "Créée le"
+
+#. module: letter
+#: view:letter.receipt:letter.view_letter_receipt_form
+msgid "Date Receipt"
+msgstr "Date Réception"
+
+#. module: letter
+#: field:letter,date:0 field:letter.receipt,date:0 field:letter.sent,date:0
+msgid "Date letter"
+msgstr "Date lettre"
+
+#. module: letter
+#: help:letter,message_last_post:0 help:letter.receipt,message_last_post:0
+#: help:letter.sent,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr "Date du dernier message posté pour ce document "
+
+#. module: letter
+#: field:letter,date_recipient_receipt:0
+#: field:letter.receipt,date_recipient_receipt:0
+#: field:letter.sent,date_recipient_receipt:0
+msgid "Date received"
+msgstr "Date réception"
+
+#. module: letter
+#: field:letter,date_reply:0 field:letter.receipt,date_reply:0
+#: field:letter.sent,date_reply:0
+msgid "Date reply"
+msgstr "Date de réponse"
+
+#. module: letter
+#: field:letter,date_sent:0 field:letter.receipt,date_sent:0
+#: field:letter.sent,date_sent:0
+msgid "Date sent"
+msgstr "Date Envoie"
+
+#. module: letter
+#: help:letter,date_recipient_receipt:0
+#: help:letter.receipt,date_recipient_receipt:0
+#: help:letter.sent,date_recipient_receipt:0
+msgid ""
+"Date with the letter sent by registered post with acknowledgment of receipt "
+"was received by the recipient"
+msgstr ""
+"Date de réception de la lettre envoyée par lettre recommandée avec accusé de "
+"réception par le destinataire"
+
+#. module: letter
+#: view:letter.reply.wizard:letter.view_letter_reply_wizard
+msgid "Do you really want to create an reply for this letter?"
+msgstr "Voulez-vous vraiment créer une réponse à cette lettre?"
+
+#. module: letter
+#: view:letter:letter.view_letter_form selection:letter,state:0
+#: view:letter.receipt:letter.letter_receipt_view_filter
+#: view:letter.receipt:letter.view_letter_receipt_form
+#: selection:letter.receipt,state:0 selection:letter.sent,state:0
+msgid "Done"
+msgstr "Terminé"
+
+#. module: letter
+#: selection:letter,state:0
+#: view:letter.receipt:letter.letter_receipt_view_filter
+#: selection:letter.receipt,state:0
+#: view:letter.sent:letter.letter_sent_view_filter
+#: selection:letter.sent,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: letter
+#: field:letter,user_id:0
+#: view:letter.receipt:letter.letter_receipt_view_filter
+#: field:letter.receipt,user_id:0
+#: view:letter.sent:letter.letter_sent_view_filter field:letter.sent,user_id:0
+msgid "Editor"
+msgstr "Rédacteur"
+
+#. module: letter
+#: constraint:letter.cat:0
+msgid "Error ! You cannot create recursive category."
+msgstr "Erreur! Vous ne pouvez pas créer la catégorie récursive."
+
+#. module: letter
+#: code:addons/letter/letter.py:434 code:addons/letter/letter.py:454
+#, python-format
+msgid "Error!"
+msgstr "Erreur!"
+
+#. module: letter
+#: field:letter,message_follower_ids:0
+#: field:letter.receipt,message_follower_ids:0
+#: field:letter.sent,message_follower_ids:0
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: letter
+#: view:website:letter.report_letter_document
+msgid "For Is"
+msgstr "A l'attention de"
+
+#. module: letter
+#: field:letter,for_is:0 field:letter.receipt,for_is:0
+#: field:letter.sent,for_is:0
+msgid "For is"
+msgstr "A l'attention de"
+
+#. module: letter
+#: view:letter.receipt:letter.letter_receipt_view_filter
+#: view:letter.sent:letter.letter_sent_view_filter
+msgid "Group By..."
+msgstr "Grouper Par..."
+
+#. module: letter
+#: help:letter,message_summary:0 help:letter.receipt,message_summary:0
+#: help:letter.sent,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+msgstr ""
+"Contient le résumé de la discussion (nombre de messages, ...). Ce résumé est "
+"au format HTML pour permettre son utilisation dans les vues kanban."
+
+#. module: letter
+#: field:letter,id:0 field:letter.cat,id:0 field:letter.courtesy,id:0
+#: field:letter.receipt,id:0 field:letter.reply.wizard,id:0
+#: field:letter.sent,id:0 field:letter.sent.model,id:0
+#: field:letter.transmission,id:0
+msgid "ID"
+msgstr "Identifiant"
+
+#. module: letter
+#: help:letter,message_unread:0 help:letter.receipt,message_unread:0
+#: help:letter.sent,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: letter
+#: help:letter,letter_id:0 help:letter,letter_receipt_id:0
+#: help:letter,letter_sent_id:0 help:letter.receipt,letter_id:0
+#: help:letter.receipt,letter_receipt_id:0
+#: help:letter.receipt,letter_sent_id:0 help:letter.sent,letter_id:0
+#: help:letter.sent,letter_receipt_id:0 help:letter.sent,letter_sent_id:0
+msgid ""
+"If this letter was split, then this field links to the letter which contains "
+"the already processed part."
+msgstr ""
+"If this letter was split, then this field links to the letter which contains "
+"the already processed part."
+
+#. module: letter
+#: help:letter,date_reply:0 help:letter.receipt,date_reply:0
+#: help:letter.sent,date_reply:0
+msgid "Indicate the date on which the letter was reply"
+msgstr "Indiquer la date de réponse"
+
+#. module: letter
+#: help:letter,date_sent:0 help:letter.receipt,date_sent:0
+#: help:letter.sent,date_sent:0
+msgid "Indicate the date on which the letter was sent"
+msgstr "Indiquer la date d'envoi de la lettre"
+
+#. module: letter
+#: help:letter,date:0 help:letter.receipt,date:0 help:letter.sent,date:0
+msgid ""
+"Indicate the time of writing the letter. This should appear in the address"
+msgstr ""
+"Indiquer la date de rédaction de la lettre qui apparaitra sous l'adresse "
+"avec la ville sou la forme 'Le 01/01/2014 à Paris'"
+
+#. module: letter
+#: field:letter,message_is_follower:0
+#: field:letter.receipt,message_is_follower:0
+#: field:letter.sent,message_is_follower:0
+msgid "Is a Follower"
+msgstr "Est abonné"
+
+#. module: letter
+#: field:letter,message_last_post:0 field:letter.receipt,message_last_post:0
+#: field:letter.sent,message_last_post:0
+msgid "Last Message Date"
+msgstr "Date dernier message"
+
+#. module: letter
+#: field:letter,write_uid:0 field:letter.cat,write_uid:0
+#: field:letter.courtesy,write_uid:0 field:letter.receipt,write_uid:0
+#: field:letter.reply.wizard,write_uid:0 field:letter.sent,write_uid:0
+#: field:letter.sent.model,write_uid:0 field:letter.transmission,write_uid:0
+msgid "Last Updated by"
+msgstr "Derniere mise à jour par"
+
+#. module: letter
+#: field:letter,write_date:0 field:letter.cat,write_date:0
+#: field:letter.courtesy,write_date:0 field:letter.receipt,write_date:0
+#: field:letter.reply.wizard,write_date:0 field:letter.sent,write_date:0
+#: field:letter.sent.model,write_date:0 field:letter.transmission,write_date:0
+msgid "Last Updated on"
+msgstr "Derniere mise à jour le"
+
+#. module: letter
+#: field:letter.cat,parent_left:0
+msgid "Left Parent"
+msgstr "Parent gauche"
+
+#. module: letter
+#: code:addons/letter/wizard/letter_reply.py:133
+#: model:ir.actions.act_window,name:letter.letter_action_form
+#: model:ir.actions.report.xml,name:letter.report_letter_model
+#: model:ir.module.category,name:letter.module_category_group_letter
+#: view:letter:letter.letter_tree view:letter:letter.view_letter_form
+#: view:letter.receipt:letter.letter_receipt_tree
+#: view:letter.receipt:letter.view_letter_receipt_form
+#: field:res.partner,letter_ids:0
+#, python-format
+msgid "Letter"
+msgstr "Lettre"
+
+#. module: letter
+#: model:mail.message.subtype,name:letter.lt_assign
+msgid "Letter Assign"
+msgstr "Lettre assigné"
+
+#. module: letter
+#: model:mail.message.subtype,name:letter.lt_confirmed
+msgid "Letter Confirmed"
+msgstr "Lettre confirmé par validateur"
+
+#. module: letter
+#: model:mail.message.subtype,description:letter.lt_confirmed
+msgid "Letter Confirmed By Validator"
+msgstr "Lettre confirmé par le signataire"
+
+#. module: letter
+#: model:ir.model,name:letter.model_letter_courtesy
+msgid "Letter Courtesy Template"
+msgstr "Modèle de courtoisie"
+
+#. module: letter
+#: view:website:letter.report_letter_document
+msgid "Letter Draft"
+msgstr "Lettre Brouillon"
+
+#. module: letter
+#: field:letter,letter_id:0 field:letter,letter_receipt_id:0
+#: field:letter,letter_sent_id:0 field:letter.receipt,letter_id:0
+#: field:letter.receipt,letter_receipt_id:0
+#: field:letter.receipt,letter_sent_id:0 field:letter.sent,letter_id:0
+#: field:letter.sent,letter_receipt_id:0 field:letter.sent,letter_sent_id:0
+msgid "Letter Id"
+msgstr "Letter Id"
+
+#. module: letter
+#: model:ir.actions.act_window,name:letter.letter_model_action_form
+#: view:letter.sent.model:letter.letter_sent_model_tree
+msgid "Letter Model"
+msgstr "Modèle de lettre"
+
+#. module: letter
+#: model:ir.actions.act_window,name:letter.letter_receipt_action_form
+#: model:ir.model,name:letter.model_letter_receipt
+#: view:letter.sent:letter.view_letter_sent_form
+msgid "Letter Receipt"
+msgstr "Lettre Reçu"
+
+#. module: letter
+#: model:mail.message.subtype,name:letter.lt_reject
+msgid "Letter Reject"
+msgstr "Approbation de la lettre refusé"
+
+#. module: letter
+#: model:mail.message.subtype,description:letter.lt_reject
+msgid "Letter Reject By Validator"
+msgstr "Validation de la lettre refusé par le signataire"
+
+#. module: letter
+#: model:ir.actions.act_window,name:letter.action_letter_reply_wizard
+msgid "Letter Reply"
+msgstr "Réponse lettre"
+
+#. module: letter
+#: model:ir.actions.act_window,name:letter.letter_sent_action_form
+#: view:letter.receipt:letter.view_letter_receipt_form
+#: view:letter.sent:letter.letter_sent_tree
+#: model:mail.message.subtype,name:letter.lt_sent
+msgid "Letter Sent"
+msgstr "Lettre envoyée"
+
+#. module: letter
+#: model:ir.model,name:letter.model_letter_sent_model
+msgid "Letter Sent Model"
+msgstr "Modèle d'envoi de lettre"
+
+#. module: letter
+#: model:mail.message.subtype,description:letter.lt_sent
+msgid "Letter Sent To Partner"
+msgstr "Lettre envoyée au partenaire"
+
+#. module: letter
+#: model:ir.module.category,description:letter.module_category_group_letter
+msgid "Letter Sent and Receipt"
+msgstr "Lettres envoyées et reçues"
+
+#. module: letter
+#: view:letter.transmission:letter.view_letter_transmission_form
+msgid "Letter Transmission Model"
+msgstr "Modèle de remise"
+
+#. module: letter
+#: model:ir.actions.act_window,name:letter.letter_transmission_action_form
+#: field:letter,type:0 field:letter.receipt,type:0 field:letter.sent,type:0
+msgid "Letter Transmission Type"
+msgstr "Modèle de remise de courrier"
+
+#. module: letter
+#: model:mail.message.subtype,description:letter.lt_assign
+msgid "Letter assigned and waiting confirmation"
+msgstr "Lettre soumis en attente de validation"
+
+#. module: letter
+#: view:letter:letter.view_letter_form view:letter.cat:letter.letter_cat_tree
+#: view:letter.cat:letter.view_letter_cat_form
+msgid "Letter category"
+msgstr "Catégorie de Lettre"
+
+#. module: letter
+#: model:ir.model,name:letter.model_letter_sent
+msgid "Letter sent"
+msgstr "Lettre envoyée"
+
+#. module: letter
+#: view:letter.transmission:letter.letter_transmission_tree
+msgid "Letter transmission type"
+msgstr "Type de remise de lettre"
+
+#. module: letter
+#: field:letter,letter_receipt_ids:0 field:letter,letter_sent_ids:0
+#: field:letter.receipt,letter_receipt_ids:0
+#: field:letter.receipt,letter_sent_ids:0
+#: field:letter.sent,letter_receipt_ids:0 field:letter.sent,letter_sent_ids:0
+#: view:res.partner:letter.res_partner_view_buttons_letter
+msgid "Letters"
+msgstr "Lettres"
+
+#. module: letter
+#: model:res.groups,name:letter.group_letter_manager
+msgid "Manager"
+msgstr "Responsable"
+
+#. module: letter
+#: field:letter,message_ids:0 field:letter.receipt,message_ids:0
+#: field:letter.sent,message_ids:0
+msgid "Messages"
+msgstr "Messages"
+
+#. module: letter
+#: help:letter,message_ids:0 help:letter.receipt,message_ids:0
+#: help:letter.sent,message_ids:0
+msgid "Messages and communication history"
+msgstr "Historique des messages et communications"
+
+#. module: letter
+#: field:letter,letter_model_id:0
+#: view:letter.courtesy:letter.view_letter_courtesy_form
+#: field:letter.receipt,letter_model_id:0 field:letter.sent,letter_model_id:0
+#: view:letter.sent.model:letter.view_letter_sent_model_form
+msgid "Model"
+msgstr "Modèle"
+
+#. module: letter
+#: view:letter.sent:letter.view_letter_sent_form
+msgid "Model Letter"
+msgstr "Modèle de lettre"
+
+#. module: letter
+#: view:letter.sent.model:letter.view_letter_sent_model_form
+msgid "Model Lettre"
+msgstr "Modèle Lettre"
+
+#. module: letter
+#: view:letter.courtesy:letter.view_letter_courtesy_form
+#: view:letter.sent:letter.view_letter_sent_form
+msgid "Model courtesy"
+msgstr "Modèle de formule de politesse"
+
+#. module: letter
+#: view:letter.courtesy:letter.view_letter_courtesy_form
+#: view:letter.sent.model:letter.view_letter_sent_model_form
+msgid "Model name"
+msgstr "Modèle de lettre"
+
+#. module: letter
+#: view:letter.receipt:letter.letter_receipt_view_filter
+#: view:letter.sent:letter.letter_sent_view_filter
+msgid "My letters"
+msgstr "Mes lettres"
+
+#. module: letter
+#: field:letter.cat,complete_name:0 field:letter.cat,name:0
+#: field:letter.courtesy,name:0 field:letter.sent.model,name:0
+#: field:letter.transmission,name:0
+msgid "Name"
+msgstr "Description"
+
+#. module: letter
+#: field:letter,note:0 field:letter.receipt,note:0 field:letter.sent,note:0
+msgid "Notes"
+msgstr "Remarques"
+
+#. module: letter
+#: field:letter,object:0 field:letter.receipt,object:0
+#: field:letter.sent,object:0
+msgid "Object"
+msgstr "Sujet"
+
+#. module: letter
+#: help:letter.cat,sequence:0
+msgid "Order of sequence."
+msgstr "Order of sequence."
+
+#. module: letter
+#: field:letter,origin_id:0 field:letter.receipt,origin_id:0
+#: field:letter.sent,origin_id:0
+msgid "Origin"
+msgstr "Origine"
+
+#. module: letter
+#: model:ir.model,name:letter.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: letter
+#: model:ir.actions.act_window,name:letter.act_res_partner_letter
+msgid "Partner letters"
+msgstr "Lettres Partenaire"
+
+#. module: letter
+#: field:letter.cat,category_ids:0
+msgid "Partners"
+msgstr "Partenaires"
+
+#. module: letter
+#: field:letter,rel_partner_id:0 field:letter.receipt,rel_partner_id:0
+#: field:letter.sent,rel_partner_id:0
+msgid "Partners Concerned"
+msgstr "Partenaires Concernés"
+
+#. module: letter
+#: selection:letter,state:0 selection:letter.sent,state:0
+msgid "Pending Confirm"
+msgstr "Attente Validation"
+
+#. module: letter
+#: view:website:letter.report_letter_document
+msgid "REF:"
+msgstr "REF:"
+
+#. module: letter
+#: model:res.groups,name:letter.group_letter_read
+msgid "Read"
+msgstr "Lecteur"
+
+#. module: letter
+#: selection:letter,type:0 selection:letter.receipt,type:0
+#: selection:letter.sent,type:0
+msgid "Receipt letter"
+msgstr "Réception lettre"
+
+#. module: letter
+#: view:letter.sent:letter.action_receipt_wizard_form_button
+msgid "Receipt response"
+msgstr "Réponse reçue"
+
+#. module: letter
+#: field:letter.transmission,receipt:0
+msgid "Receipt substantiation"
+msgstr "Accusé de réception"
+
+#. module: letter
+#: view:letter.sent:letter.letter_sent_view_filter
+msgid "Recipiant Receipt"
+msgstr "Reçu par destinataire"
+
+#. module: letter
+#: field:letter,partner_id:0 field:letter.receipt,partner_id:0
+#: field:letter.sent,partner_id:0
+msgid "Recipient"
+msgstr "Destinataire"
+
+#. module: letter
+#: field:letter,name:0 field:letter.receipt,name:0 field:letter.sent,name:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: letter
+#: selection:letter,state:0 view:letter.sent:letter.view_letter_sent_form
+#: selection:letter.sent,state:0
+msgid "Reject"
+msgstr "Refusé"
+
+#. module: letter
+#: selection:letter,state:0
+#: view:letter.receipt:letter.action_reply_wizard_form_button
+#: view:letter.receipt:letter.letter_receipt_view_filter
+#: selection:letter.receipt,state:0
+#: view:letter.reply.wizard:letter.view_letter_reply_wizard
+msgid "Reply"
+msgstr "Répondre"
+
+#. module: letter
+#: model:ir.model,name:letter.model_letter_reply_wizard
+#: view:letter.reply.wizard:letter.view_letter_reply_wizard
+msgid "Reply letter"
+msgstr "Réponse"
+
+#. module: letter
+#: field:letter.cat,parent_right:0
+msgid "Right Parent"
+msgstr "Parent à droite"
+
+#. module: letter
+#: view:letter.sent:letter.letter_sent_view_filter
+msgid "Search Letters"
+msgstr "Recherche de lettres"
+
+#. module: letter
+#: view:letter.receipt:letter.letter_receipt_view_filter
+msgid "Search Receipt Letters"
+msgstr "Recherche lettres reçues"
+
+#. module: letter
+#: selection:letter,state:0 view:letter.sent:letter.letter_sent_view_filter
+#: view:letter.sent:letter.view_letter_sent_form selection:letter.sent,state:0
+msgid "Sent"
+msgstr "Envoyé"
+
+#. module: letter
+#: selection:letter,type:0 selection:letter.receipt,type:0
+#: selection:letter.sent,type:0
+msgid "Sent letter"
+msgstr "Envoie de lettre "
+
+#. module: letter
+#: help:letter,type:0 help:letter.receipt,type:0 help:letter.sent,type:0
+msgid "Sent or receipt transmission type."
+msgstr "Mode de remise pour l'envoie ou la réception."
+
+#. module: letter
+#: field:letter.cat,sequence:0
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: letter
+#: view:letter:letter.view_letter_form
+msgid "Set to Draft"
+msgstr "Remettre au brouillon"
+
+#. module: letter
+#: field:letter,state:0 field:letter.receipt,state:0 field:letter.sent,state:0
+msgid "Status"
+msgstr "État"
+
+#. module: letter
+#: view:letter:letter.view_letter_form
+msgid "Subject"
+msgstr "Sujet"
+
+#. module: letter
+#: view:website:letter.report_letter_document
+msgid "Subject:"
+msgstr "Sujet:"
+
+#. module: letter
+#: field:letter,message_summary:0 field:letter.receipt,message_summary:0
+#: field:letter.sent,message_summary:0
+msgid "Summary"
+msgstr "Résumé"
+
+#. module: letter
+#: sql_constraint:letter.cat:0
+msgid "THE ABBREVIATION MUST BE UNIQUE !"
+msgstr "L'abréviation doit être unique !"
+
+#. module: letter
+#: sql_constraint:letter:0 sql_constraint:letter.receipt:0
+#: sql_constraint:letter.sent:0
+msgid "THE FIELD NAME CORRESPONDING TO THE REFERENCE LETTER MUST BE UNIQUE !"
+msgstr ""
+"Le champ \"NAME\" correspondant à la référence de la lettre doit être "
+"unique !"
+
+#. module: letter
+#: sql_constraint:letter.courtesy:0 sql_constraint:letter.sent.model:0
+msgid "THE FIELD NAME MUST BE UNIQUE !"
+msgstr "Le champ \"NAME\" doit être unique !"
+
+#. module: letter
+#: view:letter.receipt:letter.letter_receipt_view_filter
+#: view:letter.sent:letter.letter_sent_view_filter
+msgid "Tag"
+msgstr "Tag"
+
+#. module: letter
+#: field:letter,category_id:0 field:letter.receipt,category_id:0
+#: field:letter.sent,category_id:0
+msgid "Tags"
+msgstr "Étiquettes"
+
+#. module: letter
+#: view:website:letter.report_letter_document
+msgid "The"
+msgstr "Le "
+
+#. module: letter
+#: help:res.users,real_paper_signature:0
+msgid "This field allows you to insert your real signature on documents"
+msgstr "Ce champ vous permet d'insérer votre signature réel dans le document"
+
+#. module: letter
+#: help:letter,letter_receipt_ids:0 help:letter,letter_sent_ids:0
+#: help:letter.receipt,letter_receipt_ids:0
+#: help:letter.receipt,letter_sent_ids:0 help:letter.sent,letter_receipt_ids:0
+#: help:letter.sent,letter_sent_ids:0
+msgid "This is the list of letter sent"
+msgstr "Ceci est une liste de(s) lettre(s) envoyé(s)"
+
+#. module: letter
+#: field:letter,transmission_type_id:0
+#: field:letter.receipt,transmission_type_id:0
+#: field:letter.sent,transmission_type_id:0
+msgid "Transmission Type"
+msgstr "Type de remise"
+
+#. module: letter
+#: view:website:letter.report_letter_document
+msgid "Type Transmission:"
+msgstr "Type de remise:"
+
+#. module: letter
+#: view:letter:letter.view_letter_form
+msgid "Type of transmission"
+msgstr "Type d'envoi"
+
+#. module: letter
+#: view:letter.transmission:letter.view_letter_transmission_form
+msgid "Unique type name"
+msgstr "Unique type name"
+
+#. module: letter
+#: field:letter,message_unread:0 field:letter.receipt,message_unread:0
+#: field:letter.sent,message_unread:0
+msgid "Unread Messages"
+msgstr "Messages non lus"
+
+#. module: letter
+#: field:letter,user_write_signature:0
+#: field:letter.receipt,user_write_signature:0
+#: field:letter.sent,user_write_signature:0
+msgid "User signature"
+msgstr "Signature Éditeur  "
+
+#. module: letter
+#: model:ir.model,name:letter.model_res_users
+msgid "Users"
+msgstr "Utilisateurs"
+
+#. module: letter
+#: field:res.users,real_paper_signature:0
+msgid "Users Paper Signature"
+msgstr "Signature papier réel "
+
+#. module: letter
+#: selection:letter,state:0 selection:letter.sent,state:0
+msgid "Waiting Receipt"
+msgstr "Attente de remise"
+
+#. module: letter
+#: code:addons/letter/wizard/letter_reply.py:41
+#, python-format
+msgid "Warning!"
+msgstr "Attention!"
+
+#. module: letter
+#: selection:letter,state:0 view:letter.sent:letter.letter_sent_view_filter
+#: selection:letter.sent,state:0
+msgid "Write Finish"
+msgstr "Rédaction terminé"
+
+#. module: letter
+#: view:letter:letter.view_letter_form
+msgid "Write your letter here"
+msgstr "Écrire votre lettre ici"
+
+#. module: letter
+#: model:res.groups,name:letter.group_letter_writer
+msgid "Writer"
+msgstr "Rédacteur"
+
+#. module: letter
+#: view:letter.sent:letter.view_letter_sent_form
+msgid "Writing Done"
+msgstr "Rédaction Terminé"
+
+#. module: letter
+#: code:addons/letter/letter.py:454
+#, python-format
+msgid ""
+"You can not confirm this letter. The signatory should give its approval."
+msgstr ""
+"Vous n'avez pas les droits pour confirmer cette lettre. Seul le signataire "
+"peut l'approuver."
+
+#. module: letter
+#: code:addons/letter/letter.py:434
+#, python-format
+msgid ""
+"You can not reject this letter. The signatory should give its approval or "
+"reject."
+msgstr ""
+"Vous n'avez pas les droits de rejeter les modification de cette lettre. Seul "
+"le signataire peut rejeter les modifications."
+
+#. module: letter
+#: code:addons/letter/wizard/letter_reply.py:41
+#, python-format
+msgid "You may only reply that are Confirmed, or Done!"
+msgstr ""
+"Vous ne pouvez répondre à une lettre que si celle-ci a le statut Confirmé ou "
+"Terminé!"
+
+#. module: letter
+#: view:website:letter.report_letter_document
+msgid "Your REFS:"
+msgstr "Vos REFS:"
+
+#. module: letter
+#: view:letter:letter.view_letter_form
+msgid "Your Ref"
+msgstr "Vos Réf"
+
+#. module: letter
+#: field:letter,your_ref:0 field:letter.receipt,your_ref:0
+#: field:letter.sent,your_ref:0
+msgid "Your Reference"
+msgstr "Votre référence"
+
+#. module: letter
+#: model:ir.model,name:letter.model_letter_cat
+msgid "letter_category"
+msgstr "Catégories Lettre"
+
+#. module: letter
+#: model:ir.model,name:letter.model_letter_transmission
+msgid "letter_transmission"
+msgstr "Lettre Type Transmission"
+
+#. module: letter
+#: model:ir.actions.act_window,name:letter.letter_cat_action_form
+msgid "lettre.cat"
+msgstr "Catégorie de lettre"

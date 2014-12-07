@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="0">
+		<record id="seq_type_letter_sent" model="ir.sequence.type">
+			<field name="name">Letter sent</field>
+			<field name="code">ged_letter_sent</field>
+		</record>
+		<record id="seq_type_letter_receipt" model="ir.sequence.type">
+			<field name="name">Letter receipt</field>
+			<field name="code">ged_letter_receipt</field>
+		</record>
+		<record id="seq_type_letter_discussion_group" model="ir.sequence.type">
+			<field name="name">Letter Discussion Group</field>
+			<field name="code">ged.discussion.letter</field>
+		</record>
+		<record id="seq_letter_sent" model="ir.sequence">
+			<field name="name">Letter Sent</field>
+			<field name="code">ged_letter_sent</field>
+			<field name="prefix">LCO%(y)s%(woy)s%(day)s</field>
+			<field name="padding">3</field>
+			<field eval="False" name="company_id"/>
+		</record>
+		<record id="seq_letter_receipt" model="ir.sequence">
+			<field name="name">Letter Receipt</field>
+			<field name="code">ged_letter_receipt</field>
+			<field name="prefix">LEN%(y)s%(woy)s%(day)s</field>
+			<field name="padding">3</field>
+			<field eval="False" name="company_id"/>
+		</record>
+		<record id="seq_letter_discussion_group" model="ir.sequence">
+			<field name="name">Letter Discussion Group</field>
+			<field name="code">ged.discussion.letter</field>
+			<field name="prefix">LDIS%(y)s%(woy)s%(day)s</field>
+			<field name="padding">2</field>
+			<field eval="False" name="company_id"/>
+		</record>
+	</data>
+</openerp>

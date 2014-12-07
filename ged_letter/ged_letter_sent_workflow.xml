@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="0">
+        <!-- MODEL -->
+        <record id="wkf_letter_sent" model="workflow">
+            <field name="name">letter.sent</field>
+            <field name="osv">letter.sent</field>
+            <field name="on_create">True</field>
+        </record>
+        <!-- Activity -->
+        <record id="act_letter_sent_draft" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_letter_sent"/>
+            <field name="flow_start">True</field>
+            <field name="name">draft</field>
+        </record>
+        <record id="act_letter_sent_write_finish" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_letter_sent"/>
+            <field name="kind">function</field>
+            <field name="name">write_finish</field>
+            <field name="action">button_write_finish()</field>
+        </record>
+        <record id="act_letter_sent_write_finish_assign" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_letter_sent"/>
+            <field name="kind">function</field>
+            <field name="name">pending_confirm</field>
+        </record>
+        <record id="act_letter_sent_router" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_letter_sent"/>
+            <field name="name">router</field>
+        </record>
+        <record id="act_letter_sent_sent" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_letter_sent"/>
+            <field name="name">sent</field>
+            <field name="kind">function</field>
+            <field name="action">button_sent()</field>
+        </record>
+        <record id="act_letter_sent_recipiant_receipt" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_letter_sent"/>
+            <field name="name">recipiant_receipt</field>
+            <field name="kind">function</field>
+            <field name="action">write({'state':'recipiant_receipt'})</field>
+        </record>
+        <record id="act_letter_sent_done" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_letter_sent"/>
+            <field name="name">done</field>
+            <field name="flow_stop">True</field>
+            <field name="kind">function</field>
+            <field name="action">button_done()</field>
+            <field name="join_mode">AND</field>
+        </record>
+        <!-- Transition -->
+        <record id="trans_letter_sent_draft_finish" model="workflow.transition">
+            <field name="act_from" ref="act_letter_sent_draft"/>
+            <field name="act_to" ref="act_letter_sent_write_finish"/>
+            <field name="signal">button_write_finish</field>
+        </record>
+        <record id="trans_letter_sent_write_check" model="workflow.transition">
+            <field name="act_from" ref="act_letter_sent_write_finish"/>
+            <field name="act_to" ref="act_letter_sent_write_finish_assign"/>
+            <field name="signal">button_confirm</field>
+        </record>
+        <record id="trans_letter_sent_router" model="workflow.transition">
+            <field name="act_from" ref="act_letter_sent_write_finish"/>
+            <field name="act_to" ref="act_letter_sent_router"/>
+            <field name="signal">button_confirm</field>
+        </record>
+        <record id="trans_letter_sent_approve_router" model="workflow.transition">
+            <field name="act_from" ref="act_letter_sent_write_finish_assign"/>
+            <field name="act_to" ref="act_letter_sent_router"/>
+            <field name="signal">button_confirm</field>
+        </record>
+        <record id="trans_letter_sent_router_sent" model="workflow.transition">
+            <field name="act_from" ref="act_letter_sent_router"/>
+            <field name="act_to" ref="act_letter_sent_sent"/>
+            <field name="signal">button_sent</field>
+        </record>
+        <record id="trans_letter_sent_router_receipt" model="workflow.transition">
+            <field name="act_from" ref="act_letter_sent_router"/>
+            <field name="act_to" ref="act_letter_sent_recipiant_receipt"/>
+            <field name="signal">button_sent</field>
+        </record>
+        <record id="trans_letter_sent_sent_done" model="workflow.transition">
+            <field name="act_from" ref="act_letter_sent_sent"/>
+            <field name="act_to" ref="act_letter_sent_done"/>
+            <field name="signal">button_done</field>
+            <field name="condition">(transmission_type_id.receipt!==False)</field>
+        </record>
+        <record id="trans_letter_sent_receipt_done" model="workflow.transition">
+            <field name="act_from" ref="act_letter_sent_recipiant_receipt"/>
+            <field name="act_to" ref="act_letter_sent_done"/>
+            <field name="signal">button_done</field>
+            <field name="condition">(transmission_type_id.receipt!==True)</field>
+        </record>
+    </data>
+</openerp>

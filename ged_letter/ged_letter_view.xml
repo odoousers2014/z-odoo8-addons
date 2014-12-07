@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Form -->
+        <record id="ged_letter_tree" model="ir.ui.view">
+            <field name="name">Letter</field>
+            <field name="model">ged.letter</field>
+            <field eval="1" name="priority"/>
+            <field name="arch" type="xml">
+                <tree colors="blue:state == 'draft';green:state == 'confirmed';purple:state == 'pending_confirm';red:state == 'reject';grey:state in ('cancel, done');orange:state in ('sent', 'recipiant_receipt')" string="Letters">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="type" string="Type"/>
+                    <field name="partner_id"/>
+                    <field name="transmission_type_id"/>
+                    <field name="state"/>
+                    <field name="user_id"/>
+                    <field invisible="1" name="user_write_signature"/>
+                </tree>
+            </field>
+        </record>
+        <record id="ged_letter_sent_tree" model="ir.ui.view">
+            <field name="name">Letter Sent</field>
+            <field name="model">ged.letter</field>
+            <field eval="1" name="priority"/>
+            <field name="arch" type="xml">
+                <tree colors="blue:state == 'draft';green:state == 'confirmed';purple:state == 'pending_confirm';red:state == 'reject';grey:state in ('cancel, done');orange:state in ('sent', 'recipiant_receipt')" string="Letter Sent">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="date_sent"/>
+                    <field name="type" string="Type"/>
+                    <field name="partner_id"/>
+                    <field name="transmission_type_id"/>
+                    <field name="state"/>
+                    <field invisible="1" name="user_id"/>
+                    <field invisible="1" name="user_write_signature"/>
+                </tree>
+            </field>
+        </record>
+        <record id="ged_letter_receipt_tree" model="ir.ui.view">
+            <field name="name">Letter Receipt</field>
+            <field name="model">ged.letter</field>
+            <field eval="1" name="priority"/>
+            <field name="arch" type="xml">
+                <tree colors="blue:state == 'draft';green:state == 'confirmed';purple:state == 'pending_confirm';red:state == 'reject';grey:state in ('cancel, done');orange:state in ('sent', 'recipiant_receipt')" string="Letter Receipt">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="type" string="Type"/>
+                    <field name="partner_id"/>
+                    <field name="transmission_type_id"/>
+                    <field name="state"/>
+                    <field invisible="1" name="user_id"/>
+                </tree>
+            </field>
+        </record>
+        <record id="act_ged_discussion_letter" model="ir.actions.act_window">
+            <field name="name">Discussion letters</field>
+            <field name="res_model">ged.letter</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="ged_letter_tree"/>
+            <field name="domain">[]</field>
+            <field name="context">{'search_default_discussion_id': active_id}</field>
+        </record>
+        <record id="ged_letter_sent_form" model="ir.ui.view">
+            <field name="name">ged.letter.sent.form</field>
+            <field name="model">ged.letter</field>
+            <field eval="12" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Letter Sent">
+                    <header>
+                        <button name="action_draft" states="write_finish,sent,reject,confirmed,cancel" string="Set to Draft" type="object"/>
+                        <button name="action_cancel" string="Cancel" type="object"/>
+                        <button class="oe_highlight" name="button_ready_to_send" states="draft" string="Ready To Send" type="object"/>
+                        <button class="oe_highlight" name="button_confirm" states="write_finish" string="Confirm" type="object"/>
+                        <button class="oe_highlight" name="action_assign_validator" states="write_finish" string="Assign Validator" type="object"/>
+                        <button class="oe_highlight" name="button_reject" states="pending_confirm" string="Reject" type="object"/>
+                        <button class="oe_highlight" name="action_letter_sent_mail" states="confirmed" string="EMail" type="object"/>
+                        <button class="oe_highlight" name="button_confirm" states="pending_confirm" string="Approve" type="object"/>
+                        <button class="oe_highlight" name="button_sent" states="confirmed" string="Sent" type="object"/>
+                        <button name="letter_print" string="Print" type="object"/>
+                        <button class="oe_highlight" name="button_confirmed_receipt" states="recipiant_receipt" string="Acknowledgment Receipt" type="object"/>
+                        <button name="button_done" states="confirmed,sent,recipiant_receipt" string="Done" type="object"/>
+                        <field name="state" nolabel="1" readonly="1" statusbar_colors="{&quot;draft&quot;:&quot;blue&quot;, &quot;done&quot;:&quot;gray&quot;}" statusbar_visible="draft,write_finish,confirmed,done" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <field attrs="{'invisible': [('name','=','/')]}" class="oe_inline" name="name" readonly="1"/>
+                        </h1>
+                        <div class="oe_right oe_button_box" name="buttons">
+                            <button class="oe_inline oe_stat_button" icon="fa-folder-open" name="%(ged_letter.act_ged_discussion_letter)d" type="action">
+                                <field name="letter_count" string="Letters" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field context="{'show_address': 1}" default_focus="1" name="partner_id" options="{&quot;always_reload&quot;: True}"/>
+                                <field name="subject" placeholder="Subject" string="Subject"/>
+                                <field name="transmission_type_id" placeholder="Type of transmission"/>
+                                <field domain="[('parent_id','!=',False)]" name="category_id" placeholder="Letter category" style="width: 50%%" widget="many2many_tags"/>
+                                <field name="date"/>
+                            </group>
+                            <group>
+                                <field name="your_ref" placeholder="Your Ref"/>
+                                <field name="origin_id"/>
+                                <field name="for_is"/>
+                                <field name="date_sent"/>
+                                <field name="date_recipient_receipt" states="recipiant_receipt"/>
+                                <field name="user_id"/>
+                                <field name="user_write_signature"/>
+                                <field invisible="1" name="company_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Letter">
+                                <group>
+                                    <group name="Content">
+                                        <field name="content" placeholder="Write your letter here" widget="html"/>
+                                        <field name="ged_template_id" placeholder="Letter Template"/>
+                                        <field name="closing_formula" placeholder="Write your closing formula here" widget="html"/>
+                                        <field name="closing_formula_id" placeholder="Letter closing formula template"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Additional Info">
+                                <group colspan="2">
+                                    <field name="rel_partner_id" widget="many2many_tags"/>
+                                    <field name="discussion_id"/>
+                                    <field name="letter_ids" widget="one2many_list"/>
+                                </group>
+                                <field invisible="1" name="type"/>
+                                <field name="note" widget="html"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="ged_letter_receipt_form" model="ir.ui.view">
+            <field name="name">ged.letter.receipt.form</field>
+            <field name="model">ged.letter</field>
+            <field eval="12" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Letter Receipt" version="7.0">
+                    <header>
+                        <button name="action_draft" states="write_finish,sent,reject,confirmed" string="Set to Draft" type="object"/>
+                        <button name="action_cancel" string="Cancel" type="object"/>
+                        <button class="oe_highlight" name="button_letter_in_confirm" states="draft" string="Confirmed" type="object"/>
+                        <button class="oe_highlight" name="button_done" states="confirmed,sent,recipiant_receipt" string="Done" type="object"/>
+                        <field name="state" nolabel="1" readonly="1" statusbar_colors="{&quot;draft&quot;:&quot;blue&quot;, &quot;done&quot;:&quot;gray&quot;}" statusbar_visible="draft,confirmed,reply,done" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <field attrs="{'invisible': [('name','=','/')]}" class="oe_inline" name="name" readonly="1"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field context="{'show_address': 1}" default_focus="1" name="partner_id" options="{&quot;always_reload&quot;: True}" string="Partenaire"/>
+                                <field name="subject" placeholder="Subject" string="Subject"/>
+                                <field name="transmission_type_id" placeholder="Type of transmission"/>
+                                <field domain="[('parent_id','!=',False)]" name="category_id" placeholder="Letter category" style="width: 50%%" widget="many2many_tags"/>
+                                <field name="date"/>
+                            </group>
+                            <group>
+                                <field name="your_ref" placeholder="Partner Ref"/>
+                                <field name="origin_id"/>
+                                <field name="for_is"/>
+                                <field name="user_id"/>
+                                <field name="user_write_signature" string="Assigned to"/>
+                                <field invisible="1" name="company_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Letter">
+                                <group>
+                                    <group name="Content">
+                                        <field name="attachments" widget="one2many_list"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Additional Info">
+                                <group colspan="2">
+                                    <field name="discussion_id"/>
+                                    <field name="letter_ids" widget="one2many_list"/>
+                                    <field name="rel_partner_id" widget="many2many_tags"/>
+                                </group>
+                                <field invisible="1" name="type"/>
+                                <field name="note" widget="html"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="ged_letter_sent_action_tree1" model="ir.actions.act_window">
+            <field name="name">Letter Sent</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ged.letter</field>
+            <field eval="False" name="view_id"/>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_type':'sent', 'type':'sent'}</field>
+            <field name="domain">[('type','=','sent')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click to create a letter.
+              </p>
+            </field>
+        </record>
+        <record id="ged_letter_receipt_action_tree1" model="ir.actions.act_window">
+            <field name="name">Letter Receipt</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ged.letter</field>
+            <field eval="False" name="view_id"/>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_type':'receipt', 'type':'receipt'}</field>
+            <field name="domain">[('type','=','receipt')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click to create a letter.
+              </p>
+            </field>
+        </record>
+        <record id="ged_letter_sent_tree1_view1" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="act_window_id" ref="ged_letter_sent_action_tree1"/>
+        </record>
+        <record id="ged_letter_receipt_tree1_view1" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="act_window_id" ref="ged_letter_receipt_action_tree1"/>
+        </record>
+        <record id="ged_letter_sent_tree1_view2" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="ged_letter_sent_form"/>
+            <field name="act_window_id" ref="ged_letter_sent_action_tree1"/>
+        </record>
+        <record id="ged_letter_receipt_tree1_view2" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="ged_letter_receipt_form"/>
+            <field name="act_window_id" ref="ged_letter_receipt_action_tree1"/>
+        </record>
+        <record id="ged_letter_sent_view_filter" model="ir.ui.view">
+            <field name="name">Letter select</field>
+            <field name="model">ged.letter</field>
+            <field name="arch" type="xml">
+                <search string="Search Letters">
+                    <filter domain="[('user_id','=',uid)]" help="My letters" icon="terp-personal+"/>
+                    <separator/>
+                    <filter domain="[('state','=',('draft'))]" icon="terp-check" string="Draft"/>
+                    <filter domain="[('state','=',('write_finish'))]" icon="terp-check" string="Write Finish"/>
+                    <filter domain="[('state','=',('sent'))]" icon="terp-check" string="Sent"/>
+                    <filter domain="[('state','=',('recipiant_receipt'))]" icon="terp-check" string="Recipiant Receipt"/>
+                    <separator/>
+                    <field name="partner_id" operator="child_of"/>
+                    <field filter_domain="[('category_id','ilike', self)]" name="category_id" string="Tag"/>
+                    <field name="user_id"/>
+                    <field name="discussion_id"/>
+                    <group expand="0" string="Group By...">
+                        <filter context="{'group_by' : 'user_id'}" domain="[]" icon="terp-personal" string="Editor"/>
+                        <filter context="{'group_by': 'parent_id'}" string="Company"/>
+                        <filter context="{'group_by': 'category_id'}" string="Category"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- Letter Category -->
+        <record id="ged_letter_tags_tree" model="ir.ui.view">
+            <field name="name">letter.tags</field>
+            <field name="model">ged.letter.tags</field>
+            <field eval="16" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Letter category">
+                    <field name="complete_name"/>
+                    <field name="name"/>
+                    <field name="abrev"/>
+                </tree>
+            </field>
+        </record>
+        <record id="ged_letter_tags_view_form" model="ir.ui.view">
+            <field name="name">letter.tags.form</field>
+            <field name="model">ged.letter.tags</field>
+            <field eval="1" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Letter category" version="7.0">
+                    <sheet>
+                        <div class="oe_title">
+                            <label class="oe_edit_only" for="name"/>
+                            <h1>
+                                <field default_focus="1" name="name" placeholder="Category name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="parent_id"/>
+                            </group>
+                            <group>
+                                <field name="abrev" placeholder="Abbreviation"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_ged_letter_tags_form" model="ir.actions.act_window">
+            <field name="name">lettre.cat</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ged.letter.tags</field>
+            <field name="view_id" ref="ged_letter_tags_tree"/>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field eval="True" name="filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click to create a new category of letter.
+              </p>
+            </field>
+        </record>
+        <!-- Transmission Type -->
+        <record id="ged_letter_transmission_tree" model="ir.ui.view">
+            <field name="name">Letter Transmission</field>
+            <field name="model">ged.letter.transmission</field>
+            <field eval="16" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Letter transmission type">
+                    <field name="ref"/>
+                    <field name="name"/>
+                    <field name="acknowledgment"/>
+                </tree>
+            </field>
+        </record>
+        <record id="ged_letter_transmission_view_form" model="ir.ui.view">
+            <field name="name">ged.letter.transmission.form</field>
+            <field name="model">ged.letter.transmission</field>
+            <field eval="1" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Letter Transmission Model" version="7.0">
+                    <sheet>
+                        <div class="oe_title">
+                            <label class="oe_edit_only" for="ref"/>
+                            <h1>
+                                <field name="ref" placeholder="Unique type name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field default_focus="1" name="name"/>
+                            </group>
+                            <group>
+                                <field name="acknowledgment"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_ged_letter_transmission_form" model="ir.actions.act_window">
+            <field name="name">Letter Transmission Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ged.letter.transmission</field>
+            <field name="view_id" ref="ged_letter_transmission_tree"/>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field eval="True" name="filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click to create of transmission model a letter.
+              </p>
+            </field>
+        </record>
+        <!-- Letter sent model -->
+        <record id="ged_letter_template_tree" model="ir.ui.view">
+            <field name="name">Sent Letter Model</field>
+            <field name="model">ged.letter.template</field>
+            <field eval="16" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Letter Model">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="ged_letter_template_form" model="ir.ui.view">
+            <field name="name">ged.letter.template.form</field>
+            <field name="model">ged.letter.template</field>
+            <field eval="1" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Model Letter">
+                    <sheet>
+                        <div class="oe_title">
+                            <label class="oe_edit_only" for="name"/>
+                            <h1>
+                                <field default_focus="1" name="name" placeholder="Model name"/>
+                            </h1>
+                        </div>
+                        <field name="content" placeholder="Model" widget="html"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_ged_letter_template_form" model="ir.actions.act_window">
+            <field name="name">Letter Template</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ged.letter.template</field>
+            <field name="view_id" ref="ged_letter_template_tree"/>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field eval="True" name="filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click to create a model letter.
+              </p>
+            </field>
+        </record>
+        <!-- Courtesy -->
+        <record id="closing_formula_tree" model="ir.ui.view">
+            <field name="name">Courtesy Model</field>
+            <field name="model">closing.formula</field>
+            <field eval="16" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Courtesy Model">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="closing_formula_form" model="ir.ui.view">
+            <field name="name">closing.formula.form</field>
+            <field name="model">closing.formula</field>
+            <field eval="1" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Model courtesy" version="7.0">
+                    <sheet>
+                        <div class="oe_title">
+                            <label class="oe_edit_only" for="name"/>
+                            <h1>
+                                <field default_focus="1" name="name" placeholder="Model name"/>
+                            </h1>
+                        </div>
+                        <field name="content" placeholder="Model" widget="html"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_closing_formula_form" model="ir.actions.act_window">
+            <field name="name">Closing Formula</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">closing.formula</field>
+            <field name="view_id" ref="closing_formula_tree"/>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field eval="True" name="filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click to create a courtesy model of insert in a letter.
+              </p>
+            </field>
+        </record>
+        <!-- Action -->
+        <!-- Menu -->
+        <menuitem icon="STOCK_JUSTIFY_FILL" id="base.ged_letter" name="GED Letter" parent="knowledge.menu_document" sequence="4"/>
+        <menuitem action="ged_letter_sent_action_tree1" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_sent_list" name="Letter Sent" parent="base.ged_letter" sequence="0"/>
+        <menuitem action="ged_letter_receipt_action_tree1" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_receipt_list" name="Letter Receipt" parent="base.ged_letter" sequence="0"/>
+        <menuitem icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_setting" name="Settings Letter" parent="base.ged_letter" sequence="3"/>
+        <menuitem action="action_ged_letter_tags_form" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_tags" name="Category letter" parent="base.ged_letter_setting" sequence="0"/>
+        <menuitem action="action_ged_letter_transmission_form" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_transmission" name="Sent type letter" parent="base.ged_letter_setting" sequence="1"/>
+        <menuitem action="action_ged_letter_template_form" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_template_liste" name="Model letter" parent="base.ged_letter_setting" sequence="2"/>
+        <menuitem action="action_closing_formula_form" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_closing_formula_liste" name="Courtesy Model" parent="base.ged_letter_setting" sequence="3"/>
+    </data>
+</openerp>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report file="ged_letter.report_ged_letter" id="report_ged_letter_model" model="ged.letter" name="ged_letter.report_ged_letter" report_type="qweb-pdf" string="Letter"/>
+    </data>
+</openerp>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_ged_letter_document">
+    <t t-call="report.external_layout">
+        <div class="page">
+            <div class="oe_structure"/>
+            <div class="text-bg-draft" style="position: fixed; padding: 2px 20px; border: 2px solid #F2ACAE; border-radius: 33px;">
+                 <h3 style="color:#F2ACAE; font-size: 2em;" class="type-doc-head">
+                        <span t-if="o.state not in ['confirmed','sent','recipient_receipt','done']">Letter Draft </span>
+                </h3>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-xs-offset-7">
+                    <div class="recipient-block">
+                        <div t-if="o.partner_id.name"> <strong t-field="o.partner_id.name"></strong></div>
+                        <div t-if="o.partner_id.street"><div t-field="o.partner_id.street"></div></div>
+                        <div t-if="o.partner_id.street2"><div t-field="o.partner_id.street2"/></div>
+                        <div t-if="o.partner_id.zip"> <span t-field="o.partner_id.zip"/> <span t-field="o.partner_id.city"/> </div>
+                        <div style="font-size: 12px;" t-if="o.for_is"><span>For Is </span><span t-field="o.for_is"/></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6">
+                           <div>
+                               <div class="ref-block" style="font-size:90%;">
+                                    <div t-if="o.name"><strong>REF: </strong><span t-field="o.name"/></div>
+                                    <div t-if="o.your_ref"><strong>Your REFS: </strong><span t-field="o.your_ref"/></div>
+                                    <div t-if="o.transmission_type_id.name"><strong>Type Transmission: </strong><span t-field="o.transmission_type_id.name"/></div>
+                                    <div t-if="o.subject"><strong>Subject: </strong><span t-field="o.subject"/></div>
+                                    <p></p>
+                                </div>
+                            </div>
+                </div>
+                <div class="col-xs-5 col-xs-offset-1">
+                    <p></p>
+                    <div t-if="o.date"><span>The </span><span t-field="o.date"/><span t-if="o.company_id.city"><span> at </span><span t-field="o.company_id.city"/></span></div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div t-if="o.content"><div t-field="o.content" t-field-options='{"widget": "html"}' style="margin-top: 15px;"></div></div>
+                    <p></p>
+                    <div t-if="o.closing_formula"><div t-field="o.closing_formula" t-field-options='{"widget": "html"}'></div></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-5 col-xs-offset-7">
+                    <div style="margin-top: 25px;">
+                        <div t-if="o.user_write_signature"><div t-field="o.user_write_signature"></div></div>
+                        <div t-if="o.confirmed_user">
+                            <div t-if="o.user_write_signature.real_paper_signature"><div t-field="o.user_write_signature.real_paper_signature" t-field-options='{"widget": "image"}'></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="oe_structure"/>
+        </div>
+    </t>
+</template>
+
+<template id="report_ged_letter">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'ged_letter.report_ged_letter_document')"/>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>
