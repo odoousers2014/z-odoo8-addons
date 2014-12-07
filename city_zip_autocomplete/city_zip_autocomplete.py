@@ -78,9 +78,12 @@ class city_zip_autocomplete(models.Model):
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
         args = args or []
+        addr = self.browse()
+
         if name:
-            args = [('name', operator, name)] + args
-        if not args:
-            args = [('city', operator, name)] + args
-        addr = self.search(args, limit=limit)
+            addr = self.search([('name', 'ilike', name)] + args, limit=limit)
+
+        if not addr:
+            addr = self.search([('city', operator, name)] + args, limit=limit)
+
         return addr.name_get()

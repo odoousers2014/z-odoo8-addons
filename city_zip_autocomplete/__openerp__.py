@@ -57,5 +57,4 @@ See exemple "city_zip_autocomplete_fr"
           ],
     'installable': True,
     'active': False,
-#    'certificate': 'certificate',
 }
