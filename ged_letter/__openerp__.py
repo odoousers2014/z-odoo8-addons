@@ -41,8 +41,8 @@
              # 'ged_letter_sent_workflow.xml',
              # 'ged_letter_receipt_workflow.xml',
              'wizard/ged_letter_reply.xml',
-             # 'security/ged_letter_security.xml',
-             # 'security/ir.model.access.csv',
+             'security/ged_letter_security.xml',
+             'security/ir.model.access.csv',
              'view/report_ged_letter.xml',
              'data/ged_letter_mail.xml'
 

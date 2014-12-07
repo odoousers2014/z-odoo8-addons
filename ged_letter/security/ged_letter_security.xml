@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data noupdate="0">
-        <record model="ir.module.category" id="module_category_group_letter">
-            <field name="name">Letter</field>
-            <field name="description">Letter Sent and Receipt</field>
-            <field name="sequence">20</field>
+        <record model="ir.module.category" id="module_ged_letter">
+            <field name="name">Ged Letter</field>
+            <field name="description">Security for GED Letter addons</field>
+            <field name="sequence">16</field>
         </record>
 	    <record id="group_letter_read" model="res.groups">
 	        <field name="name">Read</field>
-	        <field name="category_id" ref="module_category_group_letter"/>	        
+	        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+	        <field name="category_id" ref="module_ged_letter"/>	        
 	    </record>
 	    <record id="group_letter_writer" model="res.groups">
 	        <field name="name">Writer</field>
-	        <field name="category_id" ref="module_category_group_letter"/>
+	        <field name="implied_ids" eval="[(4, ref('group_letter_read'))]"/>
+	        <field name="category_id" ref="module_ged_letter"/>
 	    </record>	
 	    <record id="group_letter_manager" model="res.groups">
 	        <field name="name">Manager</field>
-	        <field name="category_id" ref="module_category_group_letter"/>
+	        <field name="implied_ids" eval="[(4, ref('group_letter_writer'))]"/>
+	        <field name="category_id" ref="module_ged_letter"/>
 	    </record>
 	</data>
 </openerp>
