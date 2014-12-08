@@ -7,7 +7,7 @@
             <field name="model">ged.letter</field>
             <field eval="1" name="priority"/>
             <field name="arch" type="xml">
-                <tree colors="blue:state == 'draft';green:state == 'confirmed';purple:state == 'pending_confirm';red:state == 'reject';grey:state in ('cancel, done');orange:state in ('sent', 'recipiant_receipt')" string="Letters">
+                <tree  fonts="bold:state == 'pending_confirm'" colors="blue:state == 'draft';green:state == 'confirmed';purple:state == 'pending_confirm';red:state == 'reject';grey:state in ('cancel, done');orange:state in ('sent', 'recipiant_receipt')" string="Letters">
                     <field name="name"/>
                     <field name="date"/>
                     <field name="type" string="Type"/>
@@ -15,6 +15,7 @@
                     <field name="transmission_type_id"/>
                     <field name="state"/>
                     <field name="user_id"/>
+                    <field name="discussion_id"/>
                     <field invisible="1" name="user_write_signature"/>
                 </tree>
             </field>
@@ -24,7 +25,7 @@
             <field name="model">ged.letter</field>
             <field eval="1" name="priority"/>
             <field name="arch" type="xml">
-                <tree colors="blue:state == 'draft';green:state == 'confirmed';purple:state == 'pending_confirm';red:state == 'reject';grey:state in ('cancel, done');orange:state in ('sent', 'recipiant_receipt')" string="Letter Sent">
+                <tree fonts="bold:state == 'pending_confirm'" colors="blue:state == 'draft';green:state == 'confirmed';purple:state == 'pending_confirm';red:state == 'reject';grey:state in ('cancel, done');orange:state in ('sent', 'recipiant_receipt')" string="Letter Sent">
                     <field name="name"/>
                     <field name="date"/>
                     <field name="date_sent"/>
@@ -42,7 +43,7 @@
             <field name="model">ged.letter</field>
             <field eval="1" name="priority"/>
             <field name="arch" type="xml">
-                <tree colors="blue:state == 'draft';green:state == 'confirmed';purple:state == 'pending_confirm';red:state == 'reject';grey:state in ('cancel, done');orange:state in ('sent', 'recipiant_receipt')" string="Letter Receipt">
+                <tree fonts="bold:state == 'pending_confirm'" colors="blue:state == 'draft';green:state == 'confirmed';purple:state == 'pending_confirm';red:state == 'reject';grey:state in ('cancel, done');orange:state in ('sent', 'recipiant_receipt')" string="Letter Receipt">
                     <field name="name"/>
                     <field name="date"/>
                     <field name="type" string="Type"/>
@@ -53,14 +54,38 @@
                 </tree>
             </field>
         </record>
+        <record id="ged_letter_sent_view_filter" model="ir.ui.view">
+            <field name="name">Letter select</field>
+            <field name="model">ged.letter</field>
+            <field name="arch" type="xml">
+                <search string="Search Letters">
+                    <filter domain="[('user_id','=',uid)]" help="My letters" icon="terp-personal+"/>
+                    <separator/>
+                    <filter domain="[('state','=',('draft'))]" icon="terp-check" string="Draft"/>
+                    <filter domain="[('state','=',('write_finish'))]" icon="terp-check" string="Write Finish"/>
+                    <filter domain="[('state','=',('sent'))]" icon="terp-check" string="Sent"/>
+                    <filter domain="[('state','=',('recipiant_receipt'))]" icon="terp-check" string="Recipiant Receipt"/>
+                    <separator/>
+                    <field name="partner_id" operator="child_of"/>
+                    <field filter_domain="[('category_id','ilike', self)]" name="category_id" string="Tag"/>
+                    <field name="user_id"/>
+                    <field name="discussion_id"/>
+<!--                     <field name="category_id"/> -->
+                    <group expand="0" string="Group By...">
+                        <filter context="{'group_by' : 'user_id'}" domain="[]" icon="terp-personal" string="Editor"/>
+                        <filter context="{'group_by': 'parent_id'}" string="Company"/>
+                        <filter context="{'group_by': 'category_id'}" string="Category"/>
+                    </group>
+                </search>
+            </field>
+        </record>
         <record id="act_ged_discussion_letter" model="ir.actions.act_window">
             <field name="name">Discussion letters</field>
             <field name="res_model">ged.letter</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="ged_letter_tree"/>
-            <field name="domain">[]</field>
-            <field name="context">{'search_default_discussion_id': active_id}</field>
+            <field name="search_view_id" ref="ged_letter_sent_view_filter"/>
         </record>
         <record id="ged_letter_sent_form" model="ir.ui.view">
             <field name="name">ged.letter.sent.form</field>
@@ -88,7 +113,7 @@
                             <field attrs="{'invisible': [('name','=','/')]}" class="oe_inline" name="name" readonly="1"/>
                         </h1>
                         <div class="oe_right oe_button_box" name="buttons">
-                            <button class="oe_inline oe_stat_button" icon="fa-folder-open" name="%(ged_letter.act_ged_discussion_letter)d" type="action">
+                            <button class="oe_inline oe_stat_button" icon="fa-folder-open" name="%(ged_letter.act_ged_discussion_letter)d" context="{'search_default_discussion_id': discussion_id}" type="action">
                                 <field name="letter_count" string="Letters" widget="statinfo"/>
                             </button>
                         </div>
@@ -97,7 +122,7 @@
                                 <field context="{'show_address': 1}" default_focus="1" name="partner_id" options="{&quot;always_reload&quot;: True}"/>
                                 <field name="subject" placeholder="Subject" string="Subject"/>
                                 <field name="transmission_type_id" placeholder="Type of transmission"/>
-                                <field domain="[('parent_id','!=',False)]" name="category_id" placeholder="Letter category" style="width: 50%%" widget="many2many_tags"/>
+                                <field domain="[('type','!=','view')]" name="category_id" placeholder="Letter category" style="width: 50%%" widget="many2many_tags"/>
                                 <field name="date"/>
                             </group>
                             <group>
@@ -157,12 +182,17 @@
                         <h1>
                             <field attrs="{'invisible': [('name','=','/')]}" class="oe_inline" name="name" readonly="1"/>
                         </h1>
+                        <div class="oe_right oe_button_box" name="buttons">
+                            <button class="oe_inline oe_stat_button" icon="fa-folder-open" name="%(ged_letter.act_ged_discussion_letter)d" context="{'search_default_discussion_id': discussion_id}" type="action">
+                                <field name="letter_count" string="Letters" widget="statinfo"/>
+                            </button>
+                        </div>
                         <group>
                             <group>
                                 <field context="{'show_address': 1}" default_focus="1" name="partner_id" options="{&quot;always_reload&quot;: True}" string="Partenaire"/>
                                 <field name="subject" placeholder="Subject" string="Subject"/>
                                 <field name="transmission_type_id" placeholder="Type of transmission"/>
-                                <field domain="[('parent_id','!=',False)]" name="category_id" placeholder="Letter category" style="width: 50%%" widget="many2many_tags"/>
+                                <field domain="[('type','!=','view')]" name="category_id" placeholder="Letter category" style="width: 50%%" widget="many2many_tags"/>
                                 <field name="date"/>
                             </group>
                             <group>
@@ -228,6 +258,19 @@
               </p>
             </field>
         </record>
+        <record id="ged_letter_my_action_tree1" model="ir.actions.act_window">
+            <field name="name">My Letter</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ged.letter</field>
+            <field eval="False" name="view_id"/>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('user_write_signature','=',uid)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">My Letters.
+              </p>
+            </field>
+        </record>
         <record id="ged_letter_sent_tree1_view1" model="ir.actions.act_window.view">
             <field eval="1" name="sequence"/>
             <field name="view_mode">tree</field>
@@ -249,30 +292,6 @@
             <field name="view_mode">form</field>
             <field name="view_id" ref="ged_letter_receipt_form"/>
             <field name="act_window_id" ref="ged_letter_receipt_action_tree1"/>
-        </record>
-        <record id="ged_letter_sent_view_filter" model="ir.ui.view">
-            <field name="name">Letter select</field>
-            <field name="model">ged.letter</field>
-            <field name="arch" type="xml">
-                <search string="Search Letters">
-                    <filter domain="[('user_id','=',uid)]" help="My letters" icon="terp-personal+"/>
-                    <separator/>
-                    <filter domain="[('state','=',('draft'))]" icon="terp-check" string="Draft"/>
-                    <filter domain="[('state','=',('write_finish'))]" icon="terp-check" string="Write Finish"/>
-                    <filter domain="[('state','=',('sent'))]" icon="terp-check" string="Sent"/>
-                    <filter domain="[('state','=',('recipiant_receipt'))]" icon="terp-check" string="Recipiant Receipt"/>
-                    <separator/>
-                    <field name="partner_id" operator="child_of"/>
-                    <field filter_domain="[('category_id','ilike', self)]" name="category_id" string="Tag"/>
-                    <field name="user_id"/>
-                    <field name="discussion_id"/>
-                    <group expand="0" string="Group By...">
-                        <filter context="{'group_by' : 'user_id'}" domain="[]" icon="terp-personal" string="Editor"/>
-                        <filter context="{'group_by': 'parent_id'}" string="Company"/>
-                        <filter context="{'group_by': 'category_id'}" string="Category"/>
-                    </group>
-                </search>
-            </field>
         </record>
         <!-- Letter Category -->
         <record id="ged_letter_tags_tree" model="ir.ui.view">
@@ -300,8 +319,14 @@
                                 <field default_focus="1" name="name" placeholder="Category name"/>
                             </h1>
                         </div>
+                        <div class="oe_right oe_button_box" name="buttons">
+                            <button class="oe_inline oe_stat_button" icon="fa-folder-open" name="%(ged_letter.act_ged_discussion_letter)d" context="{'search_default_category_id': name}" type="action">
+                                <field name="letter_count" string="Letters" widget="statinfo"/>
+                            </button>
+                        </div>
                         <group>
                             <group>
+                                <field name="type"/>
                                 <field name="parent_id"/>
                             </group>
                             <group>
@@ -422,9 +447,9 @@
             </field>
         </record>
         <!-- Courtesy -->
-        <record id="closing_formula_tree" model="ir.ui.view">
+        <record id="ged_letter_closing_formula_tree" model="ir.ui.view">
             <field name="name">Courtesy Model</field>
-            <field name="model">closing.formula</field>
+            <field name="model">ged.letter.closing.formula</field>
             <field eval="16" name="priority"/>
             <field name="arch" type="xml">
                 <tree string="Courtesy Model">
@@ -432,9 +457,9 @@
                 </tree>
             </field>
         </record>
-        <record id="closing_formula_form" model="ir.ui.view">
+        <record id="ged_letter_closing_formula_form" model="ir.ui.view">
             <field name="name">closing.formula.form</field>
-            <field name="model">closing.formula</field>
+            <field name="model">ged.letter.closing.formula</field>
             <field eval="1" name="priority"/>
             <field name="arch" type="xml">
                 <form string="Model courtesy" version="7.0">
@@ -450,11 +475,11 @@
                 </form>
             </field>
         </record>
-        <record id="action_closing_formula_form" model="ir.actions.act_window">
+        <record id="action_ged_letter_closing_formula_form" model="ir.actions.act_window">
             <field name="name">Closing Formula</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">closing.formula</field>
-            <field name="view_id" ref="closing_formula_tree"/>
+            <field name="res_model">ged.letter.closing.formula</field>
+            <field name="view_id" ref="ged_letter_closing_formula_tree"/>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[]</field>
@@ -467,12 +492,13 @@
         <!-- Action -->
         <!-- Menu -->
         <menuitem icon="STOCK_JUSTIFY_FILL" id="base.ged_letter" name="GED Letter" parent="knowledge.menu_document" sequence="4"/>
-        <menuitem action="ged_letter_sent_action_tree1" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_sent_list" name="Letter Sent" parent="base.ged_letter" sequence="0"/>
-        <menuitem action="ged_letter_receipt_action_tree1" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_receipt_list" name="Letter Receipt" parent="base.ged_letter" sequence="0"/>
-        <menuitem icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_setting" name="Settings Letter" parent="base.ged_letter" sequence="3"/>
-        <menuitem action="action_ged_letter_tags_form" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_tags" name="Category letter" parent="base.ged_letter_setting" sequence="0"/>
+        <menuitem action="ged_letter_my_action_tree1" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_my_list" name="My Letters" parent="base.ged_letter" sequence="0"/>
+        <menuitem action="ged_letter_sent_action_tree1" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_sent_list" name="Letter Sent" parent="base.ged_letter" sequence="1"/>
+        <menuitem action="ged_letter_receipt_action_tree1" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_receipt_list" name="Letter Receipt" parent="base.ged_letter" sequence="2"/>
+        <menuitem action="action_ged_letter_tags_form" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_tags" name="Category letter" parent="base.ged_letter" sequence="3"/>
+        <menuitem icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_setting" name="Settings Letter" parent="base.ged_letter" sequence="10"/>
         <menuitem action="action_ged_letter_transmission_form" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_transmission" name="Sent type letter" parent="base.ged_letter_setting" sequence="1"/>
         <menuitem action="action_ged_letter_template_form" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_template_liste" name="Model letter" parent="base.ged_letter_setting" sequence="2"/>
-        <menuitem action="action_closing_formula_form" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_closing_formula_liste" name="Courtesy Model" parent="base.ged_letter_setting" sequence="3"/>
+        <menuitem action="action_ged_letter_closing_formula_form" icon="STOCK_JUSTIFY_FILL" id="base.ged_letter_closing_formula_liste" name="Courtesy Model" parent="base.ged_letter_setting" sequence="3"/>
     </data>
 </openerp>

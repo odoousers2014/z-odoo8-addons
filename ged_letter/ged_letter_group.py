@@ -64,8 +64,9 @@ class ged_letter(osv.Model):
     def _get_letter_ids(self, cr, uid, ids, name, args, context=None):
         res = {}
         for let in self.browse(cr, uid, ids, context=context):
-            res[let.id] = self.pool.get('ged.letter').search(
-                cr, uid, [('discussion_id', '=', let.discussion_id.id)], context=context)
+            if let.discussion_id:
+                res[let.id] = self.pool.get('ged.letter').search(
+                    cr, uid, [('discussion_id', '=', let.discussion_id.id)], context=context)
         return res
 
     _columns = {

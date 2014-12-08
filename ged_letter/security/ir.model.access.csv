@@ -11,6 +11,6 @@ access_ged_letter_transmission_writer,ged.letter.transmission,model_ged_letter_t
 access_ged_letter_template_manager,ged.letter.template,model_ged_letter_template,group_letter_manager,1,1,1,1
 access_ged_letter_template_read,ged.letter.template,model_ged_letter_template,group_letter_read,0,0,0,0
 access_ged_letter_template_writer,ged.letter.template,model_ged_letter_template,group_letter_writer,1,0,0,0
-access_closing_formula_manager,closing.formula,model_closing_formula,group_letter_manager,1,1,1,1
-access_closing_formula_read,closing.formula,model_closing_formula,group_letter_read,0,0,0,0
-access_closing_formula_writer,closing.formula,model_closing_formula,group_letter_writer,1,0,0,0
+access_closing_formula_manager,ged.letter.closing.formula,model_ged_letter_closing_formula,group_letter_manager,1,1,1,1
+access_closing_formula_read,ged.letter.closing.formula,model_ged_letter_closing_formula,group_letter_read,0,0,0,0
+access_closing_formula_writer,ged.letter.closing.formula,model_ged_letter_closing_formula,group_letter_writer,1,0,0,0

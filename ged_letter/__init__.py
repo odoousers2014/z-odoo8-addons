@@ -19,6 +19,7 @@
 #    along with this program.  If not, see http://www.gnu.org/licenses/.
 #
 ##############################################################################
+import ged_letter_tags
 import ged_letter
 import ged_letter_group
 import res_user

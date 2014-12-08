@@ -37,58 +37,6 @@ TYPE2LETTER = {
 MAGIC_COLUMNS = ('id', 'create_uid', 'create_date', 'write_uid', 'write_date')
 
 
-class ged_letter_tags(models.Model):
-
-    @api.v7
-    def name_get(self, cr, uid, ids, context=None):
-        if isinstance(ids, (list, tuple)) and not len(ids):
-            return []
-        if isinstance(ids, (long, int)):
-            ids = [ids]
-        reads = self.read(cr, uid, ids, ['name', 'parent_id'], context=context)
-        res = []
-        for record in reads:
-            name = record['name']
-            if record['parent_id']:
-                name = record['parent_id'][1] + ' / ' + name
-            res.append((record['id'], name))
-        return res
-
-    @api.multi
-    def _name_get_fnc(self, field_name, arg):
-        return dict(self.name_get())
-
-    _description = 'Letter Tags'
-    _name = 'ged.letter.tags'
-
-    name = fields.Char(string='Name', size=64, required=True, readonly=False)
-    parent_id = fields.Many2one('ged.letter.tags', string='Category Parent')
-    complete_name = fields.Char(string='Name', compute='_name_get_fnc',)
-    child_ids = fields.One2many(
-        'ged.letter.tags', 'parent_id', string='Child Categories')
-    abrev = fields.Char(
-        string='Abbreviation', size=5, required=True, readonly=False)
-    active = fields.Boolean(
-        string='Active', help="The active field allows you to hide the category without removing it.")
-    parent_left = fields.Integer(string='Left Parent', select=True)
-    parent_right = fields.Integer(string='Right Parent', select=True)
-    letter_ids = fields.Many2many(
-        'ged.letter', string='Letters')
-
-    _sql_constraints = [
-        ('abrev_unique', 'unique(abrev)', 'THE ABBREVIATION MUST BE UNIQUE !')
-    ]
-
-    # _parent_name = "parent_id"
-    _parent_store = True
-    _parent_order = 'name'
-    _order = 'parent_left'
-
-    _constraints = [
-        (osv.osv._check_recursion,
-         'Error ! You can not create recursive categories.', ['parent_id'])
-    ]
-
 
 class ged_letter_transmission(models.Model):
     _name = 'ged.letter.transmission'
@@ -111,8 +59,8 @@ class ged_letter_template(models.Model):
     ]
 
 
-class closing_formula(models.Model):
-    _name = 'closing.formula'
+class ged_letter_closing_formula(models.Model):
+    _name = 'ged.letter.closing.formula'
     _description = 'Closing formula template'
 
     name = fields.Char(string='Name', size=64, required=True, readonly=False)
@@ -126,7 +74,7 @@ class closing_formula(models.Model):
 class ged_letter(models.Model):
 
     _name = 'ged.letter'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'ir.needaction_mixin']
     _description = 'GED Letter'
     _track = {
         'state': {
@@ -201,7 +149,7 @@ class ged_letter(models.Model):
         string='Date received', help="Date with the letter sent by registered post with acknowledgment of receipt was received by the recipient")
     closing_formula = fields.Html(
         string='Clausing Formula', readonly=True, states={'draft': [('readonly', False)]})
-    closing_formula_id = fields.Many2one('closing.formula', string='Clausing Formula Template', readonly=True, states={
+    closing_formula_id = fields.Many2one('ged.letter.closing.formula', string='Clausing Formula Template', readonly=True, states={
                                          'draft': [('readonly', False)]}, track_visibility='onchange')
     ged_template_id = fields.Many2one('ged.letter.template', string='Model', readonly=True, states={
                                       'draft': [('readonly', False)]})
@@ -442,3 +390,8 @@ class ged_letter(models.Model):
             'target': 'new',
             'context': ctx,
         }
+
+    @api.model
+    def _needaction_domain_get(self):
+
+        return [('state', '=', 'pending_confirm')]
