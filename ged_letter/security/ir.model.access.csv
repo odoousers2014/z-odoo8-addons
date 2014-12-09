@@ -17,3 +17,6 @@ access_closing_formula_writer,ged.letter.closing.formula,model_ged_letter_closin
 access_ged_letter_reply_wizard_manager,"ged,letter,reply,wizard",model_ged_letter_reply_wizard,group_letter_manager,1,1,1,1
 access_ged_letter_reply_wizard_read,"ged,letter,reply,wizard",model_ged_letter_reply_wizard,group_letter_read,0,0,0,0
 access_ged_letter_reply_wizard_writer,"ged,letter,reply,wizard",model_ged_letter_reply_wizard,group_letter_writer,1,1,1,0
+access_ged_discussion_letter_manager,ged.discussion.letter,model_ged_discussion_letter,group_letter_manager,1,1,1,1
+access_ged_discussion_letter_read,ged.discussion.letter,model_ged_discussion_letter,group_letter_read,1,0,0,0
+access_ged_discussion_letter_writer,ged.discussion.letter,model_ged_discussion_letter,group_letter_writer,1,1,1,0
