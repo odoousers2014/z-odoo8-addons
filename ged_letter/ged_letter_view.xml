@@ -100,7 +100,7 @@
                         <button class="oe_highlight" name="button_confirm" states="write_finish" string="Confirm" type="object"/>
                         <button class="oe_highlight" name="action_assign_validator" states="write_finish" string="Assign Validator" type="object"/>
                         <button class="oe_highlight" name="button_reject" states="pending_confirm" string="Reject" type="object"/>
-                        <button class="oe_highlight" name="action_letter_sent_mail" states="confirmed" string="EMail" type="object"/>
+                        <button class="oe_highlight" name="action_letter_sent_mail" string="EMail" states="confirmed,sent,recipiant_receipt,reply,done" type="object"/>
                         <button class="oe_highlight" name="button_confirm" states="pending_confirm" string="Approve" type="object"/>
                         <button class="oe_highlight" name="button_sent" states="confirmed" string="Sent" type="object"/>
                         <button name="letter_print" string="Print" type="object"/>
@@ -141,9 +141,9 @@
                                 <group>
                                     <group name="Content">
                                         <field name="content" placeholder="Write your letter here" widget="html"/>
-                                        <field name="ged_template_id" placeholder="Letter Template"/>
+                                        <field name="ged_template_id" placeholder="Letter Template" class="oe_edit_only"/>
                                         <field name="closing_formula" placeholder="Write your closing formula here" widget="html"/>
-                                        <field name="closing_formula_id" placeholder="Letter closing formula template"/>
+                                        <field name="closing_formula_id" placeholder="Letter closing formula template" class="oe_edit_only"/>
                                     </group>
                                 </group>
                             </page>
